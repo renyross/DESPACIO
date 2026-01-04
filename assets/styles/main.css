@@ -686,7 +686,8 @@ body {
     /* Remove rounding */
     display: flex;
     justify-content: space-around;
-    padding: 0.8rem 0.5rem;
+    padding: 0.4rem 0.5rem 0.8rem;
+    /* Lift buttons up */
     z-index: 900;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -705,8 +706,29 @@ body {
     padding: 0.5rem;
     flex: 1;
     font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    /* text-transform: uppercase; Removed for sentence case */
+    letter-spacing: 0;
+    /* Reduced letter spacing */
+}
+
+.nav-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2;
+}
+
+.nav-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #E91E63;
+    /* Pink badge */
+    color: white;
+    font-size: 0.6rem;
+    padding: 1px 5px;
+    border-radius: 10px;
+    font-weight: 700;
+    border: 1px solid var(--bg-card-solid);
 }
 
 .nav-item:active {

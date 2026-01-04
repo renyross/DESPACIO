@@ -285,6 +285,14 @@ body {
     color: var(--text-muted);
 }
 
+.micro-disclaimer {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+/* Permissions */
 .permission-group {
     display: flex;
     flex-direction: column;
@@ -294,43 +302,23 @@ body {
 
 .perm-item {
     display: flex;
+    gap: 1rem;
     align-items: center;
-    /* Vertically center icon, text, and switch */
-    gap: 1.2rem;
-}
-
-.perm-text {
-    flex: 1;
-    /* Push the switch to the right */
-}
-
-/* Ensure switch doesn't shrink */
-.perm-item .toggle-switch-ui {
-    flex-shrink: 0;
-}
-
-.micro-disclaimer {
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    font-style: italic;
-    margin-bottom: 2rem;
 }
 
 .perm-icon {
     width: 48px;
     height: 48px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-card);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    border: 1px solid var(--glass-border);
+    font-size: 1.2rem;
 }
 
 .perm-text h5 {
-    font-size: 0.95rem;
-    margin-bottom: 0.2rem;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
@@ -1971,4 +1959,50 @@ body.nav-hidden #main-nav {
     padding: 0 0.5rem;
     /* Larger hit area */
     font-size: 1.2rem;
+}/* Interactive Permissions Styles */
+.perm-item.interactive {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-card);
+    padding: 1rem 1.2rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 1rem;
+    transition: var(--transition-fast);
+}
+
+.perm-item.interactive:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.perm-item.interactive .perm-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perm-item.interactive .perm-text {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.perm-item.interactive .perm-text h5 {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    color: white;
+}
+
+.perm-item.interactive .perm-text p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+    margin: 0;
 }

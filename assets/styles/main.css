@@ -234,30 +234,45 @@ body {
 
 /* Onboarding */
 .onboarding-screen {
-    padding-top: 3rem;
-    min-height: 100vh;
+    padding-top: 0;
+    /* Updated for top header */
+    min-height: 100dvh;
+    /* Mobile viewport fix */
     display: flex;
     flex-direction: column;
+    padding-bottom: 2rem;
+    /* Ensure bottom breathing room */
 }
 
 .onboarding-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    /* Slightly smaller for mobile fit */
     font-weight: 200;
-    margin-bottom: 3rem;
+    margin-top: 1rem;
+    /* Add spacing from header */
+    margin-bottom: 2rem;
+    /* Reduced from 3rem */
     line-height: 1.2;
+    padding: 0 1rem;
+    /* Ensure side padding */
 }
 
 .intent-selector {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
+    /* Tighter gap */
     margin-bottom: 2rem;
+    padding: 0 1rem;
+    /* Ensure side padding */
 }
 
 .intent-card {
     background: var(--bg-card);
-    padding: 1.5rem;
-    border-radius: 20px;
+    padding: 1.2rem;
+    /* More compact */
+    border-radius: 16px;
+    /* Slightly tighter radius */
     border: 1px solid var(--glass-border);
     cursor: pointer;
     transition: var(--transition-fast);
@@ -296,8 +311,12 @@ body {
 .permission-group {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    gap: 1.2rem;
+    /* Compact gap */
+    margin-bottom: 2rem;
+    /* Reduced margin */
+    padding: 0 1rem;
+    /* Ensure safe sides */
 }
 
 .perm-item {
@@ -652,15 +671,19 @@ body {
 /* Main Navigation */
 #main-nav {
     position: fixed;
-    bottom: 20px;
+    bottom: 0;
+    /* Dock to bottom */
     left: 50%;
     transform: translateX(-50%);
-    width: calc(100% - 40px);
-    max-width: 440px;
-    background: var(--bg-card-solid);
-    border: 1px solid var(--glass-border);
+    width: 100%;
+    /* Full width */
+    max-width: 480px;
+    background: rgba(20, 22, 26, 0.95);
+    /* Slightly more opaque */
+    border-top: 1px solid var(--glass-border);
     backdrop-filter: var(--glass-blur);
-    border-radius: 24px;
+    border-radius: 0;
+    /* Remove rounding */
     display: flex;
     justify-content: space-around;
     padding: 0.8rem 0.5rem;
@@ -1959,7 +1982,9 @@ body.nav-hidden #main-nav {
     padding: 0 0.5rem;
     /* Larger hit area */
     font-size: 1.2rem;
-}/* Interactive Permissions Styles */
+}
+
+/* Interactive Permissions Styles */
 .perm-item.interactive {
     display: flex;
     align-items: center;
@@ -2005,7 +2030,9 @@ body.nav-hidden #main-nav {
     color: var(--text-muted);
     line-height: 1.3;
     margin: 0;
-}/* Profile Detail Styles */
+}
+
+/* Profile Detail Styles */
 .profile-details-hero {
     position: relative;
     height: 60vh;
@@ -2126,6 +2153,7 @@ body.nav-hidden #main-nav {
     margin-bottom: 0.5rem;
     box-shadow: 0 4px 10px rgba(162, 128, 255, 0.4);
 }
+
 /* =========================================
    NAVIGATION ARROWS REFINEMENT
    ========================================= */
@@ -2139,18 +2167,21 @@ body.nav-hidden #main-nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;      /* 44x44px Touch Target */
+    width: 44px;
+    /* 44x44px Touch Target */
     height: 44px;
     border-radius: 50%;
     padding: 0;
     transition: background 0.2s ease, transform 0.2s ease;
     /* Ensure it overrides any previous simple text styles */
-    font-size: 0; /* Hide any fallback text if somehow mixed */
+    font-size: 0;
+    /* Hide any fallback text if somehow mixed */
 }
 
 .btn-back-icon:hover {
     background: rgba(255, 255, 255, 0.05);
-    transform: translateX(-2px); /* Subtle feedback */
+    transform: translateX(-2px);
+    /* Subtle feedback */
 }
 
 .btn-back-icon svg {
@@ -2161,17 +2192,20 @@ body.nav-hidden #main-nav {
 }
 
 /* List Item Chevron Arrows */
-.arrow-s, .arrow-v3 {
+.arrow-s,
+.arrow-v3 {
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-dim);
     width: 24px;
     height: 24px;
-    font-size: 0; /* Hide text fallback */
+    font-size: 0;
+    /* Hide text fallback */
 }
 
-.arrow-s svg, .arrow-v3 svg {
+.arrow-s svg,
+.arrow-v3 svg {
     width: 20px;
     height: 20px;
     stroke: currentColor;
@@ -2187,7 +2221,9 @@ body.nav-hidden #main-nav {
 }
 
 /* Hotfix: Ensure button behaves as inline element */
-.btn-back-icon, .arrow-s, .arrow-v3 {
+.btn-back-icon,
+.arrow-s,
+.arrow-v3 {
     display: inline-flex;
 }
 
@@ -2196,11 +2232,14 @@ body.nav-hidden #main-nav {
    ========================================= */
 
 /* 1. Dynamic Viewport Height Fix (Safari Mobile) */
-body, .container {
-    height: 100vh; /* Fallback */
+body,
+.container {
+    height: 100vh;
+    /* Fallback */
     height: 100dvh;
     width: 100%;
-    max-width: 480px; /* Ensure mobile constraint */
+    max-width: 480px;
+    /* Ensure mobile constraint */
     margin: 0 auto;
     overflow-x: hidden;
 }
@@ -2208,8 +2247,10 @@ body, .container {
 /* 2. Safe Area Insets Integration */
 #main-nav {
     padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
-    height: auto; /* allow growth for padding */
-    min-height: 80px; /* Ensure touch target space */
+    height: auto;
+    /* allow growth for padding */
+    min-height: 80px;
+    /* Ensure touch target space */
 }
 
 /* Adjust sticky headers for notched phones if needed */
@@ -2220,9 +2261,15 @@ body, .container {
 }
 
 /* 3. Touch Optimization */
-button, a, .nav-item, .setting-row-premium, .list-item-v3 {
-    touch-action: manipulation; /* Eliminate click delay */
-    -webkit-tap-highlight-color: transparent; /* Remove native flash */
+button,
+a,
+.nav-item,
+.setting-row-premium,
+.list-item-v3 {
+    touch-action: manipulation;
+    /* Eliminate click delay */
+    -webkit-tap-highlight-color: transparent;
+    /* Remove native flash */
     cursor: pointer;
 }
 
@@ -2231,27 +2278,36 @@ button, a, .nav-item, .setting-row-premium, .list-item-v3 {
     html {
         font-size: 14px;
     }
+
     .onboarding-title {
         font-size: 1.8rem;
     }
+
     .profile-main-header .user-display-name {
         font-size: 1.5rem;
     }
 }
 
 /* 5. Horizontal Scroll Prevention */
-.feature-grid, .settings-list-v2, .premium-list-v3 {
+.feature-grid,
+.settings-list-v2,
+.premium-list-v3 {
     max-width: 100%;
     overflow-x: hidden;
 }
 
 /* 6. Form Visibility on Mobile Keyboards */
 input:focus {
-    scroll-margin-top: 100px; /* Ensure input isn't hidden by sticky header */
+    scroll-margin-top: 100px;
+    /* Ensure input isn't hidden by sticky header */
 }
 
-/* Fix Floating Button for Notch */
-.btn-back-floating {
-    top: max(1.5rem, calc(1rem + env(safe-area-inset-top)));
-    left: max(1.5rem, env(safe-area-inset-left));
+
+
+/* Secure sides for Onboarding elements */
+.onboarding-screen .btn-premium,
+.onboarding-screen .micro-disclaimer {
+    width: calc(100% - 2rem);
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

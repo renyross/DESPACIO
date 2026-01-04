@@ -477,7 +477,7 @@
                     <div style="width: 24px;"></div>
                 </header>
 
-                <div class="container-content" style="padding: 1.5rem; padding-bottom: 6rem;">
+                <div class="container-content profile-edit-container">
 
                     <!-- PHOTOS -->
                     <h4 class="section-micro-title">Mes Photos</h4>
@@ -495,22 +495,17 @@
 
                     <!-- VOICE -->
                     <h4 class="section-micro-title">Ma Voix</h4>
-                    <div class="settings-list-v2"
-                        style="margin-bottom: 2rem; padding: 1.5rem; text-align: center; gap: 1rem;">
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Ajoute une note vocale pour plus de
-                            résonance.</p>
-                        <button class="btn-premium btn-secondary"
-                            style="width: auto; margin: 0 auto; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <div class="settings-list-v2 edit-voice-container">
+                        <p class="voice-record-intro">Ajoute une note vocale pour plus de résonance.</p>
+                        <button class="btn-premium btn-secondary btn-voice-record">
                             <span>🎙️</span> Enregistrer
                         </button>
                     </div>
 
                     <!-- DESCRIPTION -->
                     <h4 class="section-micro-title">Ma Description</h4>
-                    <div class="input-wrapper" style="margin-bottom: 2rem;">
-                        <textarea
-                            style="width: 100%; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1rem; color: white; font-family: inherit; resize: none;"
-                            rows="4">Vibrations intenses et caféines...</textarea>
+                    <div class="input-wrapper bio-textarea-wrapper">
+                        <textarea class="bio-textarea" rows="4">Vibrations intenses et caféines...</textarea>
                     </div>
 
                     <!-- QUI SUIS-JE -->
@@ -597,16 +592,16 @@
 
                     <!-- REPONSES -->
                     <h4 class="section-micro-title">Mes Réponses</h4>
-                    <div class="settings-list-v2" style="margin-bottom: 2rem;">
+                    <div class="settings-list-v2 edit-section-spacer">
                         <div class="setting-row-premium">
-                            <div class="setting-label" style="color: var(--accent-peche);">Ajouter une question...</div>
+                            <div class="setting-label add-question-label">Ajouter une question...</div>
                             <span class="arrow-s">+</span>
                         </div>
                     </div>
 
                     <!-- MA MUSIQUE (SPOTIFY LINK) -->
                     <h4 class="section-micro-title">Ma Musique</h4>
-                    <div class="mkt-card-v2 purple" style="margin-bottom: 2rem; align-items: center;">
+                    <div class="mkt-card-v2 purple spotify-card-edit">
                         <div class="mkt-icon-left">🎵</div>
                         <div class="mkt-content-center">
                             <h5>Connecter Spotify</h5>

@@ -1812,4 +1812,81 @@ body.nav-hidden #main-nav {
 
 .toggle-switch-ui.active .toggle-knob {
     transform: translateX(20px);
+}/* Cleaned up styles from edit profile screen */
+.profile-edit-container {
+    padding: 1.5rem;
+    padding-bottom: 6rem;
+}
+
+.edit-section-spacer {
+    margin-bottom: 2rem;
+}
+
+.edit-voice-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+    gap: 1rem;
+}
+
+.voice-record-intro {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.btn-voice-record {
+    width: auto;
+    margin: 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    /* Improved touch target */
+}
+
+/* Enhanced textarea for bio */
+.bio-textarea-wrapper {
+    margin-bottom: 2rem;
+}
+
+.bio-textarea {
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1rem;
+    color: white;
+    font-family: inherit;
+    resize: none;
+    line-height: 1.5;
+}
+
+.bio-textarea:focus {
+    outline: none;
+    border-color: var(--accent-lilas);
+}
+
+/* Specific section adjustments */
+.spotify-card-edit {
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+.add-question-label {
+    color: var(--accent-peche);
+    font-weight: 500;
+}
+
+/* Accessibility improvements for tap targets */
+.setting-row-premium {
+    min-height: 48px;
+    /* Standard accessible touch target height */
+    padding: 0.8rem 1.2rem;
+    /* Adjusted padding */
+}
+
+.arrow-s {
+    padding: 0 0.5rem;
+    /* Larger hit area */
+    font-size: 1.2rem;
 }

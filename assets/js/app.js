@@ -182,7 +182,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- UTILITIES ---
     const transitionScreens = (from, to, showNav = true) => {
         if (from === to) return;
+
+        // 1. Handle Navigation Visibility IMMEDIATELY
+        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view'];
+        const shouldHideNav = hideNavOn.includes(to.id) || !showNav;
+
+        if (shouldHideNav) {
+            mainNav.classList.add('hidden');
+            document.body.classList.add('nav-hidden');
+        }
+
+        // 2. Start Exit Animation
         from.style.opacity = '0';
+
+        // 3. Complete Transition after delay
         setTimeout(() => {
             from.classList.add('hidden');
             to.classList.remove('hidden');
@@ -191,20 +204,14 @@ document.addEventListener('DOMContentLoaded', () => {
             to.style.opacity = '1';
             to.classList.add('step-transition');
 
-            // Handle Navigation visibility
-            const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view'];
-            const shouldHideNav = hideNavOn.includes(to.id) || !showNav;
-
-            if (shouldHideNav) {
-                mainNav.classList.add('hidden');
-                document.body.classList.add('nav-hidden');
-            } else {
+            // 4. Restore Navigation if needed (with slight delay for visual smoothness)
+            if (!shouldHideNav) {
                 mainNav.classList.remove('hidden');
                 document.body.classList.remove('nav-hidden');
                 mainNav.style.opacity = '1';
             }
 
-            // Smooth scroll to top on section change
+            // 5. Scroll to top
             const container = document.querySelector('.container');
             if (container) container.scrollTop = 0;
         }, 400);
@@ -735,6 +742,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     showToast("Photo mise à jour", "Nouveau style appliqué.", "📷");
                 }
             }
+        });
+    }
+
+    const btnGlobalEdit = document.getElementById('btn-global-edit');
+    if (btnGlobalEdit) {
+        btnGlobalEdit.addEventListener('click', () => {
+            // Simulate a flow of editing by triggering the name edit first
+            // In a real app, this would open a modal with a form.
+            document.getElementById('btn-edit-name').click();
+            setTimeout(() => {
+                if (confirm("Continuer vers l'édition de la bio ?")) {
+                    document.getElementById('btn-edit-bio').click();
+                }
+            }, 500);
         });
     }
 

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messagesListScreen = document.getElementById('messages-list-screen');
     const profileDetailsScreen = document.getElementById('profile-details-screen');
     const profileEditScreen = document.getElementById('profile-edit-screen');
+    const signupScreen = document.getElementById('signup-screen');
     const endView = document.getElementById('end-view');
     const matchOverlay = document.getElementById('match-overlay');
     const toast = document.getElementById('notification-toast');
@@ -22,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnEnter = document.getElementById('btn-enter-app');
     const btnToPerms = document.getElementById('btn-to-permissions');
     const btnFinishOnboarding = document.getElementById('btn-finish-onboarding');
+    const btnCreateAccount = document.getElementById('btn-create-account');
+    const btnSubmitSignup = document.getElementById('btn-submit-signup');
+    const btnBackSignup = document.getElementById('btn-back-signup');
     const intentCards = document.querySelectorAll('.intent-card');
 
     // Discovery Logic
@@ -185,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (from === to) return;
 
         // 1. Handle Navigation Visibility IMMEDIATELY
-        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view', 'profile-edit-screen'];
+        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view', 'profile-edit-screen', 'signup-screen'];
         const shouldHideNav = hideNavOn.includes(to.id) || !showNav;
 
         if (shouldHideNav) {
@@ -245,12 +249,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     setInterval(triggerNearbyVibe, 45000);
 
-    // --- NAVIGATION ---
+    // --- APP FLOW LOGIC ---
     if (btnEnter) btnEnter.addEventListener('click', () => {
-        transitionScreens(landing, onboardingFlow);
-        onboardingIntent.classList.remove('hidden');
-        const progress = document.getElementById('onboarding-progress');
-        if (progress) progress.style.width = '33%';
+        landing.classList.add('hidden');
+        onboardingFlow.classList.remove('hidden');
+    });
+
+    if (btnCreateAccount) btnCreateAccount.addEventListener('click', () => {
+        transitionScreens(landing, signupScreen, false);
+    });
+
+    if (btnBackSignup) btnBackSignup.addEventListener('click', () => {
+        transitionScreens(signupScreen, landing, false);
+    });
+
+    if (btnSubmitSignup) btnSubmitSignup.addEventListener('click', () => {
+        // Simulate account creation
+        showToast("Compte créé", "Bienvenue dans Despacio.", "✨");
+        setTimeout(() => {
+            signupScreen.classList.add('hidden');
+            onboardingFlow.classList.remove('hidden');
+            onboardingIntent.classList.remove('hidden'); // Ensure the first onboarding step is visible
+            const progress = document.getElementById('onboarding-progress');
+            if (progress) progress.style.width = '33%';
+        }, 1000);
     });
 
     if (btnToPerms) btnToPerms.addEventListener('click', () => {

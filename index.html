@@ -23,7 +23,7 @@
 
                 <div class="landing-ctas" style="margin-top: 3rem;">
                     <button class="btn-premium btn-primary" id="btn-enter-app">Démarrer maintenant</button>
-                    <button class="btn-premium btn-secondary">Créer mon espace</button>
+                    <button class="btn-premium btn-secondary" id="btn-create-account">Créer mon espace</button>
                 </div>
             </div>
 
@@ -44,6 +44,52 @@
             </div>
 
             <div style="height: 100px;"></div> <!-- Spacer -->
+        </section>
+
+        <!-- SIGNUP SCREEN -->
+        <section id="signup-screen" class="hidden step-transition">
+            <header class="profile-nav-header glass-header"
+                style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
+                <button class="btn-back-icon" id="btn-back-signup">←</button>
+                <div style="flex: 1;"></div>
+            </header>
+
+            <div class="container-content"
+                style="padding: 2rem; display: flex; flex-direction: column; min-height: 80vh; justify-content: center;">
+
+                <h2 class="onboarding-title" style="text-align: left; margin-bottom: 2rem;">Initier votre<br><span
+                        style="color: var(--accent-lilas);">Espace</span></h2>
+
+                <div class="input-group" style="margin-bottom: 1.5rem;">
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.05em;">IDENTIFIANT</label>
+                    <div class="input-wrapper"
+                        style="border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(255,255,255,0.03);">
+                        <input type="email" placeholder="votre@email.com"
+                            style="width: 100%; background: transparent; border: none; padding: 1rem; color: white; outline: none;">
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 2rem;">
+                    <label
+                        style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.05em;">CLÉ
+                        D'ACCÈS</label>
+                    <div class="input-wrapper"
+                        style="border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(255,255,255,0.03);">
+                        <input type="password" placeholder="••••••••"
+                            style="width: 100%; background: transparent; border: none; padding: 1rem; color: white; outline: none;">
+                    </div>
+                </div>
+
+                <button class="btn-premium btn-primary" id="btn-submit-signup"
+                    style="width: 100%; margin-bottom: 1.5rem;">Activer l'espace</button>
+
+                <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+                    En continuant, vous acceptez nos <span style="text-decoration: underline;">Conditions de
+                        Résonance</span>.
+                </p>
+
+            </div>
         </section>
 
         <!-- ONBOARDING FLOW -->

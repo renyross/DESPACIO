@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileEditScreen = document.getElementById('profile-edit-screen');
     const signupScreen = document.getElementById('signup-screen');
     const loginScreen = document.getElementById('login-screen');
+    const otpScreen = document.getElementById('otp-screen');
     const endView = document.getElementById('end-view');
     const matchOverlay = document.getElementById('match-overlay');
     const toast = document.getElementById('notification-toast');
@@ -29,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnBackSignup = document.getElementById('btn-back-signup');
     const btnLoginPhone = document.getElementById('btn-login-phone');
     const btnBackLogin = document.getElementById('btn-back-login');
+    const btnRequestOtp = document.getElementById('btn-request-otp');
+    const btnBackOtp = document.getElementById('btn-back-otp');
+    const btnChangeNumber = document.getElementById('btn-change-number');
+    const otpDigits = document.querySelectorAll('.otp-digit');
     const intentCards = document.querySelectorAll('.intent-card');
 
     // Discovery Logic
@@ -192,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (from === to) return;
 
         // 1. Handle Navigation Visibility IMMEDIATELY
-        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view', 'profile-edit-screen', 'signup-screen'];
+        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view', 'profile-edit-screen', 'signup-screen', 'login-screen', 'otp-screen'];
         const shouldHideNav = hideNavOn.includes(to.id) || !showNav;
 
         if (shouldHideNav) {
@@ -261,30 +266,160 @@ document.addEventListener('DOMContentLoaded', () => {
         transitionScreens(loginScreen, landing, false);
     });
 
-    if (btnLoginPhone) btnLoginPhone.addEventListener('click', () => {
-        // Mock transition to Onboarding/Discovery
-        transitionScreens(loginScreen, onboardingFlow, false);
+    if (btnRequestOtp) btnRequestOtp.addEventListener('click', () => {
+        const phoneInput = document.getElementById('login-phone-input');
+        // Basic validation
+        if (phoneInput && phoneInput.value.length > 5) {
+            transitionScreens(loginScreen, otpScreen, false);
+            setTimeout(() => { if (otpDigits.length > 0) otpDigits[0].focus(); }, 500);
+        } else {
+            showToast("Incomplet", "Entrez un numéro valide.", "⚠️");
+        }
+    });
+
+    if (btnBackOtp) btnBackOtp.addEventListener('click', () => {
+        transitionScreens(otpScreen, loginScreen, false);
+    });
+
+    if (btnChangeNumber) btnChangeNumber.addEventListener('click', () => {
+        transitionScreens(otpScreen, loginScreen, false);
+    });
+
+    // OTP Interaction Logic
+    otpDigits.forEach((digit, idx) => {
+        digit.addEventListener('input', (e) => {
+            if (e.target.value.length >= 1) {
+                if (idx < otpDigits.length - 1) {
+                    otpDigits[idx + 1].focus();
+                } else {
+                    // Last digit -> Validate
+                    digit.blur();
+                    const status = document.getElementById('otp-status');
+                    if (status) {
+                        status.innerText = "Validation...";
+                        status.style.color = "var(--accent-lilas)";
+                    }
+                    setTimeout(() => {
+                        if (status) {
+                            status.innerText = "Succès";
+                            status.style.color = "#4CAF50";
+                        }
+                        setTimeout(() => {
+                            transitionScreens(otpScreen, discovery, true);
+                        }, 800);
+                    }, 1000);
+                }
+            }
+        });
+        digit.addEventListener('keydown', (e) => {
+            if (e.key === 'Backspace' && e.target.value === '' && idx > 0) {
+                otpDigits[idx - 1].focus();
+            }
+        });
     });
 
     if (btnCreateAccount) btnCreateAccount.addEventListener('click', () => {
         transitionScreens(landing, signupScreen, false);
     });
 
-    if (btnBackSignup) btnBackSignup.addEventListener('click', () => {
-        transitionScreens(signupScreen, landing, false);
+    // Old Back Handler Removed - Handled in Progressive Logic below
+
+
+    // --- PROGRESSIVE SIGNUP LOGIC ---
+    const signupSteps = Array.from(document.querySelectorAll('.signup-step'));
+    const stepDots = Array.from(document.querySelectorAll('.step-dot'));
+    let currentStepIndex = 0;
+
+    const updateSignupState = () => {
+        stepDots.forEach((dot, idx) => dot.classList.toggle('active', idx <= currentStepIndex));
+        signupSteps.forEach((step, idx) => {
+            step.classList.toggle('active', idx === currentStepIndex);
+        });
+    };
+
+    // Next Buttons
+    document.querySelectorAll('.btn-next-step').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.classList.contains('disabled')) return;
+            const nextId = btn.dataset.next;
+            const nextStep = document.getElementById(nextId);
+            if (nextStep) {
+                const nextIndex = signupSteps.indexOf(nextStep);
+                if (nextIndex !== -1) {
+                    currentStepIndex = nextIndex;
+                    updateSignupState();
+                }
+            }
+        });
     });
 
-    if (btnSubmitSignup) btnSubmitSignup.addEventListener('click', () => {
-        // Simulate account creation
-        showToast("Compte créé", "Bienvenue dans Despacio.", "✨");
-        setTimeout(() => {
-            signupScreen.classList.add('hidden');
-            onboardingFlow.classList.remove('hidden');
-            onboardingIntent.classList.remove('hidden'); // Ensure the first onboarding step is visible
-            const progress = document.getElementById('onboarding-progress');
-            if (progress) progress.style.width = '33%';
-        }, 1000);
+    // Custom Back Button for Signup
+    if (btnBackSignup) {
+        // We override the default behavior by cloning to remove old listeners if any, or just define specific logic
+        // Since we removed the old listener above, we can just add new one.
+        btnBackSignup.addEventListener('click', () => {
+            if (currentStepIndex > 0) {
+                currentStepIndex--;
+                updateSignupState();
+            } else {
+                transitionScreens(signupScreen, landing, false);
+            }
+        });
+    }
+
+    // Step 1: Phone Validation
+    const signupPhone = document.getElementById('signup-phone');
+    if (signupPhone) {
+        signupPhone.addEventListener('input', (e) => {
+            const btn = document.querySelector('#step-contact .btn-next-step');
+            if (btn) e.target.value.length > 8 ? btn.classList.remove('disabled') : btn.classList.add('disabled');
+        });
+    }
+
+    // Step 2 & 3: Selection
+    document.querySelectorAll('.select-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const parent = opt.closest('.selection-grid');
+            parent.querySelectorAll('.select-option').forEach(o => o.classList.remove('selected'));
+            opt.classList.add('selected');
+
+            const step = opt.closest('.signup-step');
+            const btn = step.querySelector('.btn-next-step');
+            if (btn) btn.classList.remove('disabled');
+        });
     });
+
+    // Step 4: Geo
+    const btnGeoBig = document.querySelector('.btn-geo-big');
+    if (btnGeoBig) {
+        btnGeoBig.addEventListener('click', () => {
+            showToast("Géolocalisation", "Position trouvée : Lyon", "📍");
+            const step = document.getElementById('step-location');
+            const btn = step.querySelector('.btn-next-step');
+            if (btn) btn.classList.remove('disabled');
+        });
+    }
+
+    // Step 5: Final Creation
+    const chkConsentFinal = document.getElementById('chk-consent-final');
+    const btnFinalCreate = document.getElementById('btn-final-create');
+
+    if (chkConsentFinal && btnFinalCreate) {
+        chkConsentFinal.addEventListener('change', (e) => {
+            e.target.checked ? btnFinalCreate.classList.remove('disabled') : btnFinalCreate.classList.add('disabled');
+        });
+
+        btnFinalCreate.addEventListener('click', () => {
+            showToast("Compte créé", "Bienvenue sur Despacío.", "✨");
+            setTimeout(() => {
+                signupScreen.classList.add('hidden');
+                // Go to Onboarding Flow or directly App
+                onboardingFlow.classList.remove('hidden');
+                const intent = document.getElementById('onboarding-intent');
+                if (intent) intent.classList.remove('hidden');
+            }, 1000);
+        });
+    }
 
     if (btnToPerms) btnToPerms.addEventListener('click', () => {
         transitionScreens(onboardingIntent, onboardingPerms);

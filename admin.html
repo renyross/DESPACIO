@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESPACIO — Admin Back-Office</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #07080a;
+            --bg-card: rgba(20, 22, 26, 0.7);
+            --bg-card-solid: #14161a;
+            --accent-lilas: #d4c5ff;
+            --accent-peche: #ffd1ba;
+            --text-pure: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-glow: rgba(212, 197, 255, 0.03);
+            --danger: #ff6b6b;
+            --success: #51cf66;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-pure);
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        aside {
+            width: var(--sidebar-width);
+            background: var(--bg-card-solid);
+            border-right: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .admin-brand {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--accent-lilas);
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            padding: 1rem 0;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 300;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        nav li.active {
+            color: var(--accent-peche);
+            font-weight: 500;
+        }
+
+        nav li:hover {
+            color: var(--text-pure);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 3rem;
+            overflow-y: auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-weight: 200;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Dashboard Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, var(--glass-glow), transparent);
+            pointer-events: none;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 197, 255, 0.2);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* Tables & Lists */
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        th {
+            text-align: left;
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-danger {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--danger);
+        }
+
+        .badge-success {
+            background: rgba(81, 207, 102, 0.1);
+            color: var(--success);
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-pure);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-delete {
+            color: var(--danger);
+            border-color: rgba(255, 107, 107, 0.2);
+        }
+
+        /* Tech Panel */
+        .tech-status {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--success);
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        @media (max-width: 1024px) {
+            aside {
+                width: 80px;
+                padding: 1.5rem 1rem;
+            }
+
+            .admin-brand,
+            nav li span {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside>
+        <div class="admin-brand">DESPACIO</div>
+        <nav>
+            <ul>
+                <li class="active" onclick="switchSection('dashboard', this)"><span>📊</span> <span>Dashboard</span>
+                </li>
+                <li onclick="switchSection('users', this)"><span>👥</span> <span>Utilisateurs</span></li>
+                <li onclick="switchSection('moderation', this)"><span>🛡️</span> <span>Modération</span></li>
+                <li onclick="switchSection('tech', this)"><span>⚡</span> <span>Technique</span></li>
+            </ul>
+        </nav>
+        <div style="margin-top: auto; color: var(--text-dim); font-size: 0.7rem;">Admin: Marc A.</div>
+    </aside>
+
+    <main>
+        <header>
+            <h2 id="section-title">Aperçu Global</h2>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Mise à jour à 03:57</div>
+        </header>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="section-dashboard" class="admin-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Vibes totales (24h)</div>
+                    <div class="stat-value" id="stat-swipes">12,482</div>
+                    <div style="font-size: 0.7rem; color: var(--success); margin-top: 0.5rem;">↑ 12% vs semaine dernière
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Résonances (Matches)</div>
+                    <div class="stat-value" id="stat-matches">1,156</div>
+                    <div style="font-size: 0.7rem; color: var(--success); margin-top: 0.5rem;">↑ 8% vs semaine dernière
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Conversations actives</div>
+                    <div class="stat-value" id="stat-messages">8,942</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">Volume stable</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                <div
+                    style="background: var(--bg-card); padding: 2rem; border-radius: 24px; border: 1px solid var(--glass-border);">
+                    <h3 style="font-weight: 300; margin-bottom: 2rem; font-size: 1.1rem;">Évolution de l'engagement</h3>
+                    <div style="height: 200px; display: flex; align-items: flex-end; gap: 10px;">
+                        <!-- Simple CSS-based bar chart for engagement -->
+                        <div
+                            style="flex: 1; height: 40%; background: var(--accent-lilas); opacity: 0.4; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="flex: 1; height: 55%; background: var(--accent-lilas); opacity: 0.5; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="flex: 1; height: 45%; background: var(--accent-lilas); opacity: 0.6; border-radius: 4px;">
+                        </div>
+                        <div
+                            style="flex: 1; height: 70%; background: var(--accent-lilas); opacity: 0.7; border-radius: 4px;">
+                        </div>
+                        <div style="flex: 1; height: 85%; background: var(--accent-lilas); border-radius: 4px;"></div>
+                        <div style="flex: 1; height: 65%; background: var(--accent-lilas); border-radius: 4px;"></div>
+                        <div style="flex: 1; height: 95%; background: var(--accent-lilas); border-radius: 4px;"></div>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; margin-top: 1rem; color: var(--text-muted); font-size: 0.7rem;">
+                        <span>LUN</span><span>MAR</span><span>MER</span><span>JEU</span><span>VEN</span><span>SAM</span><span>DIM</span>
+                    </div>
+                </div>
+
+                <div
+                    style="background: var(--bg-card); padding: 2rem; border-radius: 24px; border: 1px solid var(--glass-border);">
+                    <h3 style="font-weight: 300; margin-bottom: 2rem; font-size: 1.1rem;">Intention dominante</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                                <span>Court terme</span>
+                                <span>45%</span>
+                            </div>
+                            <div
+                                style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;">
+                                <div style="width: 45%; height: 100%; background: var(--accent-lilas);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                                <span>Casual</span>
+                                <span>30%</span>
+                            </div>
+                            <div
+                                style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;">
+                                <div style="width: 30%; height: 100%; background: var(--accent-peche);"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.5rem;">
+                                <span>Chill</span>
+                                <span>25%</span>
+                            </div>
+                            <div
+                                style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;">
+                                <div style="width: 25%; height: 100%; background: var(--text-muted);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USERS SECTION -->
+        <section id="section-users" class="admin-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h3 style="font-weight: 300;">Gestion des utilisateurs</h3>
+                <div style="position: relative;">
+                    <input type="text" placeholder="Rechercher un pseudo ou ID..."
+                        style="background: var(--bg-card); border: 1px solid var(--glass-border); color: white; padding: 0.8rem 1.2rem; border-radius: 12px; width: 300px; font-family: inherit; font-size: 0.9rem;">
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Statut</th>
+                        <th>Dernière connexion</th>
+                        <th>Vibes Envoyées</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 32px; height: 32px; background: #333; border-radius: 50%;"></div>
+                            <span>Léna_24</span>
+                        </td>
+                        <td><span class="badge badge-success">Actif</span></td>
+                        <td>Il y a 2 min</td>
+                        <td>428</td>
+                        <td>
+                            <button class="btn-action">Voir Profil</button>
+                            <button class="btn-action">Shadowban</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 32px; height: 32px; background: #333; border-radius: 50%;"></div>
+                            <span>Marc_O</span>
+                        </td>
+                        <td><span class="badge badge-success">Actif</span></td>
+                        <td>Hier, 22:45</td>
+                        <td>1,204</td>
+                        <td>
+                            <button class="btn-action">Voir Profil</button>
+                            <button class="btn-action">Shadowban</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 32px; height: 32px; background: #333; border-radius: 50%;"></div>
+                            <span>Inès_R</span>
+                        </td>
+                        <td><span class="badge" style="background: rgba(255,255,255,0.05); color: #888;">Inactif</span>
+                        </td>
+                        <td>Le 12/10/2023</td>
+                        <td>12</td>
+                        <td>
+                            <button class="btn-action">Voir Profil</button>
+                            <button class="btn-action">Shadowban</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- MODERATION SECTION -->
+        <section id="section-moderation" class="admin-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h3 style="font-weight: 300;">Centre de Sécurité & Modération</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <select
+                        style="background: var(--bg-card); border: 1px solid var(--glass-border); color: white; padding: 0.8rem; border-radius: 12px; font-family: inherit;">
+                        <option>Tous les types</option>
+                        <option>Harcèlement</option>
+                        <option>Contenu inapproprié</option>
+                        <option>Faux profil</option>
+                    </select>
+                    <input type="text" placeholder="Filtrer par pseudo..."
+                        style="background: var(--bg-card); border: 1px solid var(--glass-border); color: white; padding: 0.8rem 1.2rem; border-radius: 12px; width: 250px; font-family: inherit;">
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Utilisateur Signalé</th>
+                        <th>Raison du signalement</th>
+                        <th>Gravité</th>
+                        <th>Rapporteur</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="font-weight: 500;">Pseudo #4521</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted);">Inscrit il y a 3j</div>
+                        </td>
+                        <td>
+                            <div>Comportement inapproprié</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted);">"Langage agressif en chat"</div>
+                        </td>
+                        <td><span class="badge badge-danger">Haute</span></td>
+                        <td>@julie_vibe</td>
+                        <td><span class="badge" style="background: rgba(255, 165, 0, 0.1); color: orange;">En
+                                attente</span></td>
+                        <td>
+                            <button class="btn-action">Avertir</button>
+                            <button class="btn-action btn-delete">Bannir</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="font-weight: 500;">Pseudo #8890</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted);">Inscrit il y a 14j</div>
+                        </td>
+                        <td>
+                            <div>Photo non conforme</div>
+                            <div style="font-size: 0.7rem; color: var(--text-muted);">"Paysage uniquement"</div>
+                        </td>
+                        <td><span class="badge" style="background: rgba(255,255,255,0.05); color: #fff;">Moyenne</span>
+                        </td>
+                        <td>@system_bot</td>
+                        <td><span class="badge badge-success">Traité</span></td>
+                        <td>
+                            <button class="btn-action">Supprimer photo</button>
+                            <button class="btn-action">Ignorer</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- TECH SECTION -->
+        <section id="section-tech" class="admin-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Uptime Serveur</div>
+                    <div class="stat-value">99.98%</div>
+                    <div style="font-size: 0.7rem; color: var(--success); margin-top: 0.5rem;">Total (30j)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Réponse API</div>
+                    <div class="stat-value">38ms</div>
+                    <div style="font-size: 0.7rem; color: var(--success); margin-top: 0.5rem;">Percentile 95</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Poids Media (Avg)</div>
+                    <div class="stat-value">245KB</div>
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">Optimisé via WebP
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="tech-status">
+                    <div class="status-item">
+                        <div>
+                            <div class="status-dot"></div>
+                            <strong>Algorithme de Feed</strong>
+                        </div>
+                        <span class="item-value">Latence: 45ms (Optimal)</span>
+                    </div>
+                    <div class="status-item">
+                        <div>
+                            <div class="status-dot"></div>
+                            <strong>Instant Messaging Bus</strong>
+                        </div>
+                        <span class="item-value">Temps de réponse: 12ms</span>
+                    </div>
+                    <div class="status-item">
+                        <div>
+                            <div class="status-dot" style="background: orange;"></div>
+                            <strong>Service de Localisation</strong>
+                        </div>
+                        <span class="item-value">Charge élevée (85%)</span>
+                    </div>
+                </div>
+
+                <div
+                    style="background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; padding: 1.5rem; border-radius: 12px; font-size: 0.8rem; overflow-y: auto; height: 220px; border: 1px solid var(--glass-border);">
+                    <div style="color: #666; margin-bottom: 0.5rem;">[Live Terminal Logs]</div>
+                    <div id="live-logs">
+                        <div>03:57:12 > INFO: Auth service heartbeat received</div>
+                        <div>03:57:15 > WARN: Geo-indexing delay on Cluster B</div>
+                        <div>03:57:22 > INFO: Image optimization task completed (ID: 442)</div>
+                        <div>03:57:30 > INFO: User #4521 reported (Moderation queue updated)</div>
+                        <div>03:57:45 > INFO: Scaling out discovery-service node #04...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function switchSection(id, element) {
+            // Update Navigation
+            document.querySelectorAll('nav li').forEach(li => li.classList.remove('active'));
+            element.classList.add('active');
+
+            // Update Section Visibility
+            document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById('section-' + id).classList.add('active');
+
+            // Update Title
+            const titles = {
+                dashboard: 'Aperçu Global',
+                users: 'Gestion des Utilisateurs',
+                moderation: 'Centre de Sécurité',
+                tech: 'Performance Système'
+            };
+            document.getElementById('section-title').textContent = titles[id];
+        }
+
+        // Simulate live stats updating
+        setInterval(() => {
+            const swipes = document.getElementById('stat-swipes');
+            if (swipes) {
+                let current = parseInt(swipes.innerText.replace(',', ''));
+                swipes.innerText = (current + Math.floor(Math.random() * 5)).toLocaleString();
+            }
+        }, 3000);
+
+        // Simulate live logs
+        const logsContainer = document.getElementById('live-logs');
+        setInterval(() => {
+            if (!logsContainer) return;
+            const newLog = document.createElement('div');
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' +
+                now.getMinutes().toString().padStart(2, '0') + ':' +
+                now.getSeconds().toString().padStart(2, '0');
+
+            const messages = [
+                'INFO: WebSocket connection established',
+                'INFO: User matching calculated (Group #12)',
+                'DEBUG: Cache hit for resource "discovery_feed"',
+                'INFO: New user verified via ID check',
+                'WARN: Minor latency detected in messaging bus'
+            ];
+
+            newLog.innerText = `${time} > ${messages[Math.floor(Math.random() * messages.length)]}`;
+            logsContainer.appendChild(newLog);
+            if (logsContainer.children.length > 10) logsContainer.removeChild(logsContainer.firstChild);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }, 4000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESPACIO — Experience Premium</title>
+    <link rel="stylesheet" href="assets/styles/main.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- INITIAL LANDING -->
+        <section id="landing" class="step-transition">
+            <div class="header-group">
+                <span class="brand-label">Presence & Vibes</span>
+                <div class="logo-container">
+                    <img src="assets/images/logo.png" alt="DESPACIO Logo" class="app-logo">
+                </div>
+                <p class="landing-tagline">Une esthétique de la rencontre, libre et sans promesses.</p>
+
+                <div class="landing-ctas" style="margin-top: 3rem;">
+                    <button class="btn-premium btn-primary" id="btn-enter-app">Démarrer maintenant</button>
+                    <button class="btn-premium btn-secondary">Créer mon espace</button>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Liberté Absolute</h4>
+                    <p>Aucun scoring, aucune pression. Juste l'énergie du moment partagé.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Instant Présent</h4>
+                    <p>Découvrez qui vibre autour de vous, ici et maintenant.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="font-size: 0.8rem; color: var(--text-dim); font-style: italic;">"Viens comme tu es. Reste si
+                    tu vibres."</p>
+            </div>
+
+            <div style="height: 100px;"></div> <!-- Spacer -->
+        </section>
+
+        <!-- ONBOARDING FLOW -->
+        <div id="onboarding-flow" class="hidden">
+            <div class="onboarding-progress-bar">
+                <div class="progress-fill" id="onboarding-progress" style="width: 33%;"></div>
+            </div>
+
+            <!-- SCREEN 1: INTENTION -->
+            <section id="onboarding-intent" class="onboarding-screen step-transition">
+                <h2 class="onboarding-title">Quelle est ton<br><span style="color: var(--accent-lilas)">énergie</span>
+                    aujourd'hui ?</h2>
+                <div class="intent-selector">
+                    <div class="intent-card" data-intent="court-terme">
+                        <h4>Court terme</h4>
+                        <p>Vivre un moment intense, ici et maintenant.</p>
+                    </div>
+                    <div class="intent-card" data-intent="casual">
+                        <h4>Casual</h4>
+                        <p>Partager un verre, une vibe, sans scénario.</p>
+                    </div>
+                    <div class="intent-card" data-intent="chill">
+                        <h4>Chill</h4>
+                        <p>Prendre le temps de discuter et de voir.</p>
+                    </div>
+                </div>
+                <p class="micro-disclaimer">"Tu peux changer d'avis à tout moment."</p>
+                <button class="btn-premium btn-primary btn-onboarding-next" id="btn-to-permissions">Continuer</button>
+            </section>
+
+            <!-- SCREEN 2: PERMISSIONS -->
+            <section id="onboarding-perms" class="onboarding-screen step-transition hidden">
+                <h2 class="onboarding-title">Pour vibrer<br><span style="color: var(--accent-peche)">ensemble</span>
+                </h2>
+                <div class="permission-group">
+                    <div class="perm-item">
+                        <div class="perm-icon">📍</div>
+                        <div class="perm-text">
+                            <h5>Localisation</h5>
+                            <p>Pour te montrer les vibes à proximité immédiate.</p>
+                        </div>
+                    </div>
+                    <div class="perm-item">
+                        <div class="perm-icon">🔔</div>
+                        <div class="perm-text">
+                            <h5>Notifications</h5>
+                            <p>Juste pour te prévenir d'une résonance. Pas de pression.</p>
+                        </div>
+                    </div>
+                    <div class="perm-item">
+                        <div class="perm-icon">📷</div>
+                        <div class="perm-text">
+                            <h5>Photos</h5>
+                            <p>Une image unique pour incarner ta présence.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="micro-disclaimer">"Rien n'est définitif ici."</p>
+                <button class="btn-premium btn-primary btn-onboarding-next" id="btn-finish-onboarding">Prêt·e ?</button>
+            </section>
+        </div>
+
+        <!-- APP INTERFACE -->
+        <div id="app-wrapper" class="hidden">
+
+            <!-- DISCOVERY (DÉCOUVRIR) -->
+            <section id="discovery" class="discovery-container">
+                <header class="discovery-nav"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0.5rem;">
+                    <button id="btn-top-profile" style="background: none; border: none; cursor: pointer;">
+                        <div
+                            style="width: 32px; height: 32px; border-radius: 10px; border: 1px solid var(--glass-border); display: flex; justify-content: center; align-items: center; color: var(--text-muted); font-size: 1rem;">
+                            👤</div>
+                    </button>
+                    <span
+                        style="font-size: 0.7rem; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase;">Près
+                        de toi</span>
+                    <button id="btn-top-settings" style="background: none; border: none; cursor: pointer;">
+                        <div
+                            style="width: 32px; height: 32px; border-radius: 10px; border: 1px solid var(--glass-border); display: flex; justify-content: center; align-items: center; color: var(--text-muted); font-size: 1rem;">
+                            ⚙️</div>
+                    </button>
+                </header>
+
+                <div class="swipe-container" id="swipe-area" style="position: relative; flex: 1; margin-top: 1rem;">
+                    <div class="swipe-indicator-label vibe-label" id="vibe-marker">Ça vibe !</div>
+                    <div class="swipe-indicator-label skip-label" id="skip-marker">Passer</div>
+
+                    <div class="profile-card-premium" id="profile-interaction">
+                        <img src="assets/images/ines.png" class="profile-img-main" id="profile-image"
+                            alt="Presence Profile">
+                        <div class="profile-overlay">
+                            <div class="profile-header">
+                                <h2 class="profile-name-lg" id="profile-name">Inès</h2>
+                                <span class="premium-badge">Moment Flash</span>
+                            </div>
+                            <p class="presence-status" id="profile-location">À 1.2km — Disponible maintenant</p>
+                            <p class="vibe-tag" id="profile-vibe">"Éclat nocturne 🌙"</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="limit-text"
+                    style="text-align: center; font-size: 0.7rem; color: var(--text-dim); margin-top: 1rem;">Exploration
+                    libre du moment</p>
+            </section>
+
+            <!-- CHAT SYSTEM -->
+            <section id="chat-screen" class="chat-window hidden">
+                <header class="chat-nav">
+                    <div class="chat-circle-avatar">
+                        <img src="assets/images/ines.png" alt="Avatar">
+                    </div>
+                    <div class="chat-details">
+                        <h4>Inès</h4>
+                        <p>Expire dans <span id="timer-val" style="color: var(--accent-peche);">23:59:59</span></p>
+                    </div>
+                    <button id="btn-security-toggle"
+                        style="margin-left: auto; background: none; border: none; color: var(--text-dim); cursor: pointer; padding: 0.5rem; font-size: 1.2rem;">⋮</button>
+                    <button id="btn-close-chat"
+                        style="background: none; border: 1px solid var(--text-dim); color: var(--text-dim); padding: 0.5rem 1rem; border-radius: 100px; font-size: 0.6rem; text-transform: uppercase;">Quitter</button>
+                </header>
+
+                <div id="security-menu" class="chat-security-menu">
+                    <button class="security-option" id="btn-report">Signaler ce moment</button>
+                    <button class="security-option" id="btn-block">Bloquer la présence</button>
+                    <button class="security-option danger" id="btn-delete-moment">Effacer tout le moment</button>
+                </div>
+
+                <div class="messages-flow" id="msg-container">
+                    <div class="chat-prompt">"Pas besoin d'une phrase parfaite. Vibre l'instant."</div>
+                    <div class="msg-bubble msg-received">
+                        Le moment est précieux. "Pas besoin d'être parfait·e."
+                    </div>
+                </div>
+
+                <div class="chat-prompt" id="ephemeral-note">"Tu peux changer d'avis. Le moment t'appartient."</div>
+
+                <div class="chat-composer">
+                    <input type="text" id="chat-input-field" class="composer-input" placeholder="Écrire un message..."
+                        autocomplete="off">
+                    <button id="btn-send-msg" class="btn-send">Envoyer</button>
+                </div>
+            </section>
+
+            <!-- USER PROFILE SCREEN -->
+            <section id="user-profile" class="hidden step-transition">
+                <header class="profile-nav-header glass-header"
+                    style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
+                    <button class="btn-back-icon" id="btn-close-profile">←</button>
+                    <h3 style="font-weight: 300; letter-spacing: 0.15em; font-size: 0.9rem; text-transform: uppercase;">
+                        Résonance Perso</h3>
+                    <button id="btn-open-settings"
+                        style="background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 1.2rem;">⚙️</button>
+                </header>
+
+                <div class="profile-dashboard-v2">
+                    <div class="profile-main-header">
+                        <div class="profile-avatar-wrapper" id="btn-edit-avatar">
+                            <img src="assets/images/sample_profile.png" class="user-avatar-premium" alt="Mon Avatar"
+                                id="img-avatar-user">
+                            <div class="photo-edit-badge">
+                                <span class="badge-icon">📷</span>
+                            </div>
+                        </div>
+                        <h2 class="user-display-name"><span id="val-header-name">Léo</span> <span
+                                class="age-bracket">28</span></h2>
+                        <div class="completion-pill">Profil complété à 85%</div>
+                    </div>
+
+                    <div class="stats-overview-container">
+                        <div class="stat-item-premium">
+                            <span class="stat-val-h">24</span>
+                            <span class="stat-label-h">Vues</span>
+                        </div>
+                        <div class="divider-v"></div>
+                        <div class="stat-item-premium">
+                            <span class="stat-val-h">12</span>
+                            <span class="stat-label-h">Matchs</span>
+                        </div>
+                        <div class="divider-v"></div>
+                        <div class="stat-item-premium">
+                            <span class="stat-val-h">#1</span>
+                            <span class="stat-label-h">Rang</span>
+                        </div>
+                    </div>
+
+                    <div class="marketing-carousel-container">
+                        <h4 class="section-micro-title">Optimise ta présence</h4>
+                        <div class="marketing-stack-v2">
+                            <div class="mkt-card-v2 gold">
+                                <div class="mkt-icon-left">🎫</div>
+                                <div class="mkt-content-center">
+                                    <h5>Premium Pass</h5>
+                                    <p>Découvre qui t'aime en secret.</p>
+                                </div>
+                                <button class="mkt-action-btn-mini">Découvrir</button>
+                            </div>
+                            <div class="mkt-card-v2 purple">
+                                <div class="mkt-icon-left">🚀</div>
+                                <div class="mkt-content-center">
+                                    <h5>Booster</h5>
+                                    <p>Sois le centre du monde pendant 30 min.</p>
+                                </div>
+                                <button class="mkt-action-btn-mini">Activer</button>
+                            </div>
+                            <div class="mkt-card-v2 peach">
+                                <div class="mkt-icon-left">💌</div>
+                                <div class="mkt-content-center">
+                                    <h5>Love Note</h5>
+                                    <p>Envoie un mot doux direct.</p>
+                                </div>
+                                <button class="mkt-action-btn-mini">Essayer</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-settings-v2">
+                        <h4 class="section-micro-title">Mon Identité</h4>
+                        <div class="settings-list-v2">
+                            <div class="setting-row-premium" id="btn-edit-name">
+                                <div class="setting-label">Nom d'affichage</div>
+                                <div class="setting-value" id="val-name">Léo</div>
+                                <span class="arrow-s">›</span>
+                            </div>
+                            <div class="setting-row-premium" id="btn-edit-bio">
+                                <div class="setting-label">Bio éphémère</div>
+                                <div class="setting-value truncate" id="val-bio">"Vibrations intenses et caféines..."
+                                </div>
+                                <span class="arrow-s">›</span>
+                            </div>
+                            <div class="setting-row-premium" id="btn-edit-intent">
+                                <div class="setting-label">Intention active</div>
+                                <div class="setting-value" id="val-intent">Chill</div>
+                                <span class="arrow-s">›</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 6rem;"></div>
+            </section>
+
+            <!-- SETTINGS SCREEN -->
+            <section id="settings-screen" class="hidden step-transition">
+                <header class="profile-nav-header glass-header"
+                    style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
+                    <button class="btn-back-icon" id="btn-close-settings">←</button>
+                    <h3 style="font-weight: 300; letter-spacing: 0.15em; font-size: 0.9rem; text-transform: uppercase;">
+                        Paramètres</h3>
+                    <div style="width: 24px;"></div>
+                </header>
+
+                <div class="settings-content-wrapper">
+                    <!-- Premium Upsell -->
+                    <div class="premium-upsell-banner">
+                        <div class="upsell-icon">💎</div>
+                        <div class="upsell-body">
+                            <h4>Despacio Premium</h4>
+                            <p>Découvre qui vibre pour toi et boosts ta présence.</p>
+                        </div>
+                        <button class="btn-upsell-action">Offres</button>
+                    </div>
+
+                    <!-- Compte Section -->
+                    <div class="settings-group-v3">
+                        <h4 class="group-title">Compte</h4>
+                        <div class="premium-list-v3">
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">📧</div>
+                                <div class="item-label-v3">Email</div>
+                                <div class="item-value-v3">leo@despacio.app</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">🔒</div>
+                                <div class="item-label-v3">Mot de passe</div>
+                                <div class="item-value-v3">••••••••</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Confidentialité Section -->
+                    <div class="settings-group-v3">
+                        <h4 class="group-title">Confidentialité</h4>
+                        <div class="premium-list-v3">
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">👁️</div>
+                                <div class="item-label-v3">Profil visible</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">👻</div>
+                                <div class="item-label-v3">Mode incognito</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox">
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Push Section -->
+                    <div class="settings-group-v3">
+                        <h4 class="group-title">Notifications Push</h4>
+                        <div class="premium-list-v3">
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">❤️</div>
+                                <div class="item-label-v3">Nouvelle résonance (Match)</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox" id="push-match-v3" checked>
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">📩</div>
+                                <div class="item-label-v3">Nouveaux messages</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox" id="push-message-v3" checked>
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">📍</div>
+                                <div class="item-label-v3">Vibes à proximité</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox" id="push-nearby-v3" checked>
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Email Section -->
+                    <div class="settings-group-v3">
+                        <h4 class="group-title">Notifications Email</h4>
+                        <div class="premium-list-v3">
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">🌊</div>
+                                <div class="item-label-v3">Moments manqués</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox" id="email-activity-v3">
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">⚙️</div>
+                                <div class="item-label-v3">Mises à jour de l'app</div>
+                                <label class="premium-switch">
+                                    <input type="checkbox" id="email-updates-v3" checked>
+                                    <span class="premium-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <p class="section-footer-note">"On ne t'écrira que pour l'essentiel. Promis."</p>
+                    </div>
+
+                    <!-- Aide & Légal Section -->
+                    <div class="settings-group-v3">
+                        <h4 class="group-title">Aide & Légal</h4>
+                        <div class="premium-list-v3">
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">🤝</div>
+                                <div class="item-label-v3">Aide en ligne</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">🛡️</div>
+                                <div class="item-label-v3">Conseils de sécurité</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">📜</div>
+                                <div class="item-label-v3">Conditions d'utilisation</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">🕵️</div>
+                                <div class="item-label-v3">Préférences de confidentialité</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">🏛️</div>
+                                <div class="item-label-v3">Règles de communauté</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                            <div class="list-item-v3">
+                                <div class="item-icon-v3">👁️‍🗨️</div>
+                                <div class="item-label-v3">Politique de confidentialité</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone Section -->
+                    <div class="settings-group-v3">
+                        <h4 class="group-title">Actions</h4>
+                        <div class="premium-list-v3">
+                            <div class="list-item-v3 danger">
+                                <div class="item-icon-v3">🗑️</div>
+                                <div class="item-label-v3">Supprimer mon compte</div>
+                                <span class="arrow-v3">›</span>
+                            </div>
+                        </div>
+                        <p class="section-footer-note">"Tout est sous ton contrôle."</p>
+                        <p class="section-footer-note" style="margin-top: 0.2rem;">"Change d’intention à tout moment."
+                        </p>
+                    </div>
+
+                    <div class="settings-footer-v3">
+                        <span class="app-version">Version 1.0.0 — Despacio</span>
+                    </div>
+                </div>
+
+                <div style="height: 6rem;"></div>
+            </section>
+
+            <!-- PROFILE DETAILS SCREEN (FULL BIO) -->
+            <section id="profile-details-screen" class="hidden step-transition">
+                <div class="profile-details-hero">
+                    <button class="btn-back-floating" id="btn-close-details">↓</button>
+
+                    <div class="details-photo-slider" id="detail-photos">
+                        <!-- Photos will be injected here -->
+                    </div>
+
+                    <div class="photo-pagination" id="detail-dots">
+                        <!-- Dots will be injected here -->
+                    </div>
+
+                    <div class="profile-details-overlay">
+                        <div class="badge-row">
+                            <span class="premium-badge">Presence Active</span>
+                        </div>
+                        <h2 id="detail-name">Nom</h2>
+                        <p id="detail-vibe" class="vibe-tag">Vibe</p>
+                    </div>
+                </div>
+
+                <div class="profile-details-content">
+                    <div class="info-section">
+                        <h4>À propos</h4>
+                        <p id="detail-bio">Contenu de la bio...</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Au quotidien</h4>
+                        <p id="detail-daily">Mes habitudes du moment...</p>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Hobby & Passions</h4>
+                        <div class="interests-grid" id="detail-interests">
+                            <!-- Interests will be injected here -->
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4>Informations</h4>
+                        <div class="detail-info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Distance</span>
+                                <span class="info-value" id="info-dist">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Taille</span>
+                                <span class="info-value" id="info-height">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Études</span>
+                                <span class="info-value" id="info-study">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Fumeur(se)</span>
+                                <span class="info-value" id="info-smoke">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="discovery-contact-card">
+                        <h4 style="border:none; margin:0; color:white;">Pour découvrir</h4>
+                        <p style="font-size: 0.8rem; color: var(--accent-peche); margin-top: 0.5rem;">Prêt·e pour un
+                            premier pas ?</p>
+                        <a href="#" class="contact-btn" id="btn-contact-action">Découvrir le contact</a>
+                    </div>
+
+                    <div class="action-footer">
+                        <button class="btn-round-action skip" id="btn-detail-skip">✕</button>
+                        <button class="btn-round-action vibe" id="btn-detail-vibe">✨</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXPLORATION SCREEN (VIBE & CAP) -->
+            <section id="exploration-screen" class="hidden step-transition">
+                <header class="exploration-header">
+                    <div class="view-toggle">
+                        <div class="toggle-item active" id="toggle-list">Suggestions (Vibe)</div>
+                        <div class="toggle-item" id="toggle-map">Carte (Cap)</div>
+                    </div>
+                </header>
+
+                <div class="exploration-content">
+                    <!-- Suggestions/Selections View (VIBE) -->
+                    <div id="view-suggestions" class="suggested-grid-container">
+                        <div class="mood-scroller">
+                            <div class="mood-pill active">Tout</div>
+                            <div class="mood-pill">✨ Étincelles</div>
+                            <div class="mood-pill">🍵 Chill</div>
+                            <div class="mood-pill">🍷 Afterflow</div>
+                            <div class="mood-pill">👟 Urbain</div>
+                        </div>
+
+                        <h4 class="section-subtitle">Sélection du jour</h4>
+                        <div class="suggested-grid">
+                            <div class="suggestion-card">
+                                <img src="assets/images/ines.png" class="suggestion-img">
+                                <div class="suggestion-info">
+                                    <div class="suggestion-name">Inès</div>
+                                    <div class="suggestion-vibe">Éclat nocturne 🌙</div>
+                                </div>
+                            </div>
+                            <div class="suggestion-card">
+                                <img src="assets/images/ambre.png" class="suggestion-img">
+                                <div class="suggestion-info">
+                                    <div class="suggestion-name">Ambre</div>
+                                    <div class="suggestion-vibe">Confidence audacieuse 🖤</div>
+                                </div>
+                            </div>
+                            <div class="suggestion-card">
+                                <img src="assets/images/chloe.png" class="suggestion-img">
+                                <div class="suggestion-info">
+                                    <div class="suggestion-name">Chloé</div>
+                                    <div class="suggestion-vibe">Douceur solaire ☀️</div>
+                                </div>
+                            </div>
+                            <div class="suggestion-card">
+                                <img src="assets/images/maya.png" class="suggestion-img">
+                                <div class="suggestion-info">
+                                    <div class="suggestion-name">Maya</div>
+                                    <div class="suggestion-vibe">Énergie sauvage 🌿</div>
+                                </div>
+                            </div>
+                            <div class="suggestion-card">
+                                <img src="assets/images/sample_profile.png" class="suggestion-img">
+                                <div class="suggestion-info">
+                                    <div class="suggestion-name">Noa</div>
+                                    <div class="suggestion-vibe">Art & Coffee 🎨</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map View (CAP) -->
+                    <div id="view-map" class="map-view-container hidden">
+                        <div class="map-search-bar">
+                            <input type="text" placeholder="Chercher un lieu ou une vibe...">
+                        </div>
+                        <div class="map-placeholder-dynamic">
+                            <!-- Pins will be here -->
+                            <div class="map-pin hotspot" style="top: 35%; left: 45%;"><span class="map-pin-label">Inès
+                                    (1.2km)</span></div>
+                            <div class="map-pin" style="top: 55%; left: 60%;"><span class="map-pin-label">Marc
+                                    (0.8km)</span></div>
+                            <div class="map-pin" style="top: 20%; left: 75%;"><span class="map-pin-label">Sacha
+                                    (2.5km)</span></div>
+                            <div class="map-pin hotspot" style="top: 70%; left: 30%;"><span class="map-pin-label">Léa
+                                    (1.5km)</span></div>
+                        </div>
+                        <div class="map-legend">
+                            <span class="legend-item"><span class="dot hotspot"></span> Hotspot (Vibe intense)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LIKES SECTION (PULSE) -->
+            <section id="likes-screen" class="hidden step-transition">
+                <header class="exploration-header">
+                    <h3 class="screen-title" style="text-align: center; margin-bottom: 1rem;">PULSE</h3>
+                    <div class="tab-switcher">
+                        <button class="tab-btn active" data-tab="received">Reçus</button>
+                        <button class="tab-btn" data-tab="sent">Envoyés</button>
+                    </div>
+                </header>
+
+                <div id="tab-received" class="tab-content">
+                    <div class="suggested-grid" style="padding: 1rem;">
+                        <div class="suggestion-card blurred">
+                            <img src="assets/images/sample_profile.png" class="suggestion-img">
+                            <div class="suggestion-info">
+                                <div class="suggestion-name">Sacha</div>
+                                <div class="suggestion-vibe">A vibré pour toi</div>
+                            </div>
+                        </div>
+                        <div class="suggestion-card blurred">
+                            <img src="assets/images/sample_profile.png" class="suggestion-img">
+                            <div class="suggestion-info">
+                                <div class="suggestion-name">Inconnu·e</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="premium-upsell">
+                        <div class="premium-card" style="margin: 0 1rem; padding: 2rem; border-radius: 24px;">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--accent-lilas);">Découvre tes 12 Pulse</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">Ne laisse pas les moments
+                                s'échapper. Vois qui vibre pour toi.</p>
+                            <button class="btn-premium btn-primary" style="margin-top: 1.5rem; padding: 1rem;">Débloquer
+                                Premium</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-sent" class="tab-content hidden">
+                    <div class="suggested-grid" style="padding: 1rem;">
+                        <div style="grid-column: 1/-1; padding: 4rem 2rem; text-align: center;">
+                            <p style="color: var(--text-dim); font-size: 0.85rem;">Tes vibrations apparaîtront ici dès
+                                que tu auras envoyé un ✨.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MESSAGES LIST SECTION (MOTS) -->
+            <section id="messages-list-screen" class="hidden step-transition">
+                <header class="exploration-header">
+                    <h3 class="screen-title" style="text-align: center; margin-bottom: 1rem;">MOTS</h3>
+                    <div class="tab-switcher">
+                        <button class="tab-btn active" data-tab="active-chats">Sessions</button>
+                        <button class="tab-btn" data-tab="archived-chats">Archives</button>
+                    </div>
+                </header>
+
+                <div id="tab-active-chats" class="tab-content">
+                    <div class="match-requests-container" style="margin-bottom: 2rem;">
+                        <h5 class="section-subtitle"
+                            style="padding: 0 1.5rem; margin-bottom: 1rem; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;">
+                            Nouvelles résonances</h5>
+                        <div class="requests-flex"
+                            style="display: flex; gap: 1.2rem; padding: 0 1.5rem; overflow-x: auto; scrollbar-width: none;">
+                            <div class="request-avatar-glow"
+                                style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent-lilas); padding: 3px; flex-shrink: 0;">
+                                <img src="assets/images/sample_profile.png" alt="Request"
+                                    style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                            </div>
+                            <div class="request-avatar-glow"
+                                style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent-peche); padding: 3px; flex-shrink: 0; opacity: 0.6;">
+                                <img src="assets/images/sample_profile.png" alt="Request"
+                                    style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; filter: grayscale(0.5);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="messages-list">
+                        <div class="message-item" onclick="openChat('Inès')">
+                            <div class="chat-circle-avatar" style="width: 54px; height: 54px;">
+                                <img src="assets/images/ines.png" alt="Avatar">
+                            </div>
+                            <div class="message-item-details" style="flex: 1; margin-left: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                    <h4 style="font-size: 1rem; font-weight: 500;">Inès</h4>
+                                    <span style="font-size: 0.65rem; color: var(--accent-peche);">12h 05m</span>
+                                </div>
+                                <p
+                                    style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    On se retrouve pour cet espresso martini ? 🍸</p>
+                            </div>
+                            <div class="status-dot-active"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-archived-chats" class="tab-content hidden">
+                    <div style="text-align: center; padding: 4rem 2rem;">
+                        <span style="font-size: 2.5rem; opacity: 0.2;">⏳</span>
+                        <p style="color: var(--text-dim); font-size: 0.85rem; margin-top: 1.5rem;">Tes moments passés
+                            résonnent ici.<br>L'éphémère a aussi sa place.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- END VIEW -->
+            <section id="end-view" class="hidden"
+                style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 2rem;">✨</div>
+                <h3 style="font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem;">C'est tout pour aujourd'hui.</h3>
+                <p style="color: var(--text-muted); font-weight: 200; margin-bottom: 3rem;">Profitez de votre présence
+                    au monde.</p>
+                <button class="btn-premium btn-secondary" onclick="window.location.reload()">Revenir au calme</button>
+            </section>
+
+            <!-- MAIN NAVIGATION -->
+            <nav id="main-nav">
+                <button class="nav-item active" data-target="discovery" title="Découvrir">
+                    <span class="nav-icon">🌀</span>
+                    <span class="nav-label">Bio</span>
+                </button>
+                <button class="nav-item" data-target="exploration-screen-selection" title="Sélection">
+                    <span class="nav-icon">✨</span>
+                    <span class="nav-label">Vibe</span>
+                </button>
+                <button class="nav-item" data-target="exploration-screen-search" title="Recherche">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-label">Cap</span>
+                </button>
+                <button class="nav-item" data-target="likes-screen" title="Like">
+                    <span class="nav-icon">🤍</span>
+                    <span class="nav-label">Pulse</span>
+                </button>
+                <button class="nav-item" data-target="messages-list-screen" title="Message">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">Mots</span>
+                </button>
+            </nav>
+
+        </div>
+
+        <!-- MATCH NOTIFICATION OVERLAY -->
+        <div id="match-overlay" class="match-overlay">
+            <div class="match-content">
+                <h2 class="match-title">Ça vibe !</h2>
+                <div class="match-avatars">
+                    <img src="assets/images/sample_profile.png" class="match-avatar left" alt="User Avatar">
+                    <img src="assets/images/sample_profile.png" class="match-avatar right" id="match-avatar-other"
+                        alt="Other Avatar">
+                </div>
+                <p style="color: var(--text-muted); margin-bottom: 2.5rem; font-weight: 200;">Une résonance
+                    mutuelle.<br>Prêts pour un moment ?</p>
+                <div class="landing-ctas" style="padding: 0 2rem;">
+                    <button class="btn-premium btn-primary" id="btn-match-chat">Lancer la discussion</button>
+                    <button class="btn-premium btn-secondary" id="btn-match-continue">Continuer d'explorer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOTIFICATION TOAST -->
+        <div id="notification-toast" class="notification-toast">
+            <div class="notif-icon">✨</div>
+            <div class="notif-content">
+                <h6 id="notif-title">Une nouvelle vibe !</h6>
+                <p id="notif-body">Quelqu'un résonne avec ton énergie.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

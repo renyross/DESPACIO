@@ -614,59 +614,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- SWIPE LOGIC ---
+    // --- SWIPE LOGIC (SMOOTH V2) ---
     let startX = 0, currentX = 0, isDragging = false;
+
     const handleStart = (e) => {
+        if (e.target.closest('.btn-action-round') || e.target.closest('.profile-info')) return;
         startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         isDragging = true;
-        profileCard.style.transition = 'none';
+        profileCard.classList.remove('spring-reset', 'fade-in-next');
+        profileCard.style.transition = 'none'; // Instant follow
         if (securityMenu) securityMenu.classList.remove('visible');
     };
+
     const handleMove = (e) => {
         if (!isDragging) return;
+        e.preventDefault(); // Prevent scrolling while swiping
         currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         const diffX = currentX - startX;
-        profileCard.style.transform = `translateX(${diffX}px) rotate(${diffX / 20}deg)`;
-        if (diffX > 50) { vibeMarker.style.opacity = Math.min(diffX / 150, 1); skipMarker.style.opacity = 0; }
-        else if (diffX < -50) { skipMarker.style.opacity = Math.min(Math.abs(diffX) / 150, 1); vibeMarker.style.opacity = 0; }
-        else { vibeMarker.style.opacity = 0; skipMarker.style.opacity = 0; }
+
+        // Fluid rotation based on screen width ratio
+        const rotation = diffX * 0.05;
+        profileCard.style.transform = `translateX(${diffX}px) rotate(${rotation}deg)`;
+
+        // Opacity markers feedback
+        const opacity = Math.min(Math.abs(diffX) / 100, 1);
+        if (diffX > 0) {
+            vibeMarker.style.opacity = opacity;
+            skipMarker.style.opacity = 0;
+            profileCard.style.boxShadow = `0 20px 40px rgba(46, 204, 113, ${opacity * 0.2})`; // Greenish hint
+        } else {
+            skipMarker.style.opacity = opacity;
+            vibeMarker.style.opacity = 0;
+            profileCard.style.boxShadow = `0 20px 40px rgba(231, 76, 60, ${opacity * 0.2})`; // Reddish hint
+        }
     };
+
     const handleEnd = () => {
         if (!isDragging) return;
         isDragging = false;
-        profileCard.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
         const diffX = currentX - startX;
-        if (diffX > 150) swipeExit('right');
-        else if (diffX < -150) swipeExit('left');
-        else { profileCard.style.transform = 'translateX(0) rotate(0)'; vibeMarker.style.opacity = 0; skipMarker.style.opacity = 0; }
+        const threshold = 120; // Lower threshold equals easier swipe
+
+        if (diffX > threshold) swipeExit('right');
+        else if (diffX < -threshold) swipeExit('left');
+        else {
+            // Reset with Spring Effect
+            profileCard.classList.add('spring-reset');
+            profileCard.style.transform = 'translateX(0) rotate(0)';
+            profileCard.style.boxShadow = ''; // Reset shadow
+            setTimeout(() => {
+                vibeMarker.style.opacity = 0;
+                skipMarker.style.opacity = 0;
+            }, 100);
+        }
     };
+
     if (profileCard) {
-        profileCard.addEventListener('mousedown', handleStart); profileCard.addEventListener('touchstart', handleStart, { passive: true });
-        window.addEventListener('mousemove', handleMove); window.addEventListener('touchmove', handleMove, { passive: true });
-        window.addEventListener('mouseup', handleEnd); window.addEventListener('touchend', handleEnd);
+        profileCard.addEventListener('mousedown', handleStart);
+        profileCard.addEventListener('touchstart', handleStart, { passive: false }); // pure passive false for preventDefault
+        window.addEventListener('mousemove', handleMove);
+        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('mouseup', handleEnd);
+        window.addEventListener('touchend', handleEnd);
     }
+
     const swipeExit = (direction) => {
         isDragging = false;
-        profileCard.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s';
-        profileCard.style.transform = `translateX(${direction === 'right' ? 1000 : -1000}px) rotate(${direction === 'right' ? 45 : -45}deg)`;
+        profileCard.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s';
+        profileCard.style.transform = `translateX(${direction === 'right' ? window.innerWidth : -window.innerWidth}px) rotate(${direction === 'right' ? 30 : -30}deg)`;
         profileCard.style.opacity = '0';
-        profileCard.style.pointerEvents = 'none';
 
         const p = profiles[currentProfileIndex];
         if (direction === 'right') {
-            if (p && !sentLikes.find(l => l.name === p.name)) {
-                sentLikes.unshift(p);
-            }
+            if (p && !sentLikes.find(l => l.name === p.name)) sentLikes.unshift(p);
         }
 
         setTimeout(() => {
-            if (direction === 'right' && Math.random() > 0.4) {
-                showMatch();
-            } else {
-                nextProfile();
-            }
-        }, 500);
+            if (direction === 'right' && Math.random() > 0.4) showMatch();
+            else nextProfile();
+        }, 300); // Faster transition to next
     };
+
     const nextProfile = () => {
         profilesSeen++;
         if (profilesSeen >= sessionLimit) {
@@ -676,23 +704,35 @@ document.addEventListener('DOMContentLoaded', () => {
         currentProfileIndex = (currentProfileIndex + 1) % profiles.length;
         const p = profiles[currentProfileIndex];
 
+        // Reset Card State for Entrance
         profileCard.style.transition = 'none';
+
+        // Update Content
+        document.getElementById('profile-image').src = p.img;
+        document.getElementById('profile-name').textContent = p.name;
+        document.getElementById('profile-location').textContent = p.loc;
+        document.getElementById('profile-vibe').textContent = `"${p.vibe}"`;
+
+        // Apply Fade In Animation
+        profileCard.classList.remove('spring-reset'); // safe clear
+
+        // Force Reflow
+        void profileCard.offsetWidth;
+
         profileCard.style.transform = 'translateX(0) rotate(0)';
-        profileCard.style.opacity = '0';
-        profileCard.style.pointerEvents = 'auto';
+        profileCard.style.opacity = '1';
+        profileCard.style.boxShadow = '';
+
+        // Add animation class
+        profileCard.classList.add('fade-in-next');
+
+        // Cleanup animation class after it runs
+        setTimeout(() => {
+            profileCard.classList.remove('fade-in-next');
+        }, 500);
 
         vibeMarker.style.opacity = 0;
         skipMarker.style.opacity = 0;
-
-        profileImage.src = p.img;
-        profileName.textContent = p.name;
-        profileLocation.textContent = `À ${p.dist} — Disponible maintenant`;
-        profileVibe.textContent = p.vibe;
-
-        setTimeout(() => {
-            profileCard.style.transition = 'opacity 0.6s ease, transform 0.5s var(--ease-premium)';
-            profileCard.style.opacity = '1';
-        }, 100);
     };
 
     // --- PROFILE EDIT LOGIC ---

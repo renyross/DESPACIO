@@ -467,6 +467,176 @@
                 <div style="height: 6rem;"></div>
             </section>
 
+            <!-- EDIT PROFILE SCREEN -->
+            <section id="profile-edit-screen" class="hidden step-transition">
+                <header class="profile-nav-header glass-header"
+                    style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
+                    <button class="btn-back-icon" id="btn-close-edit">←</button>
+                    <h3 style="font-weight: 300; letter-spacing: 0.15em; font-size: 0.9rem; text-transform: uppercase;">
+                        Modification</h3>
+                    <div style="width: 24px;"></div>
+                </header>
+
+                <div class="container-content" style="padding: 1.5rem; padding-bottom: 6rem;">
+
+                    <!-- PHOTOS -->
+                    <h4 class="section-micro-title">Mes Photos</h4>
+                    <div class="edit-photos-grid">
+                        <div class="edit-photo-slot main">
+                            <img src="assets/images/sample_profile.png" alt="Main">
+                            <div class="edit-badge">✏️</div>
+                        </div>
+                        <div class="edit-photo-slot"><span>+</span></div>
+                        <div class="edit-photo-slot"><span>+</span></div>
+                        <div class="edit-photo-slot"><span>+</span></div>
+                        <div class="edit-photo-slot"><span>+</span></div>
+                        <div class="edit-photo-slot"><span>+</span></div>
+                    </div>
+
+                    <!-- VOICE -->
+                    <h4 class="section-micro-title">Ma Voix</h4>
+                    <div class="settings-list-v2"
+                        style="margin-bottom: 2rem; padding: 1.5rem; text-align: center; gap: 1rem;">
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Ajoute une note vocale pour plus de
+                            résonance.</p>
+                        <button class="btn-premium btn-secondary"
+                            style="width: auto; margin: 0 auto; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <span>🎙️</span> Enregistrer
+                        </button>
+                    </div>
+
+                    <!-- DESCRIPTION -->
+                    <h4 class="section-micro-title">Ma Description</h4>
+                    <div class="input-wrapper" style="margin-bottom: 2rem;">
+                        <textarea
+                            style="width: 100%; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 1rem; color: white; font-family: inherit; resize: none;"
+                            rows="4">Vibrations intenses et caféines...</textarea>
+                    </div>
+
+                    <!-- QUI SUIS-JE -->
+                    <h4 class="section-micro-title">Qui suis-je</h4>
+                    <div class="settings-list-v2" style="margin-bottom: 2rem;">
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Profession</div>
+                            <div class="setting-value">Designer</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Taille</div>
+                            <div class="setting-value">1m80</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Fumeur</div>
+                            <div class="setting-value">Non</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Enfants</div>
+                            <div class="setting-value">Non</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Nationalité</div>
+                            <div class="setting-value">Française</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Religion</div>
+                            <div class="setting-value">Agnostique</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Origine</div>
+                            <div class="setting-value">Mixte</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Signe Astro</div>
+                            <div class="setting-value">Lion</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Identité de genre</div>
+                            <div class="setting-value">Homme</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Je vis</div>
+                            <div class="setting-value">Seul</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Je mange</div>
+                            <div class="setting-value">Tout</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Je parle</div>
+                            <div class="setting-value">Fr, En</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Animaux</div>
+                            <div class="setting-value">Chat</div><span class="arrow-s">›</span>
+                        </div>
+                    </div>
+
+                    <!-- INTERETS -->
+                    <h4 class="section-micro-title">Mes Intérêts</h4>
+                    <div class="settings-list-v2" style="margin-bottom: 2rem;">
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Hobbies</div>
+                            <div class="setting-value">Photo, Lecture</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Sorties</div>
+                            <div class="setting-value">Rooftops</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Sports</div>
+                            <div class="setting-value">Escalade</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Films</div>
+                            <div class="setting-value">Sci-Fi</div><span class="arrow-s">›</span>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Musique</div>
+                            <div class="setting-value">Electro</div><span class="arrow-s">›</span>
+                        </div>
+                    </div>
+
+                    <!-- REPONSES -->
+                    <h4 class="section-micro-title">Mes Réponses</h4>
+                    <div class="settings-list-v2" style="margin-bottom: 2rem;">
+                        <div class="setting-row-premium">
+                            <div class="setting-label" style="color: var(--accent-peche);">Ajouter une question...</div>
+                            <span class="arrow-s">+</span>
+                        </div>
+                    </div>
+
+                    <!-- MA MUSIQUE (SPOTIFY LINK) -->
+                    <h4 class="section-micro-title">Ma Musique</h4>
+                    <div class="mkt-card-v2 purple" style="margin-bottom: 2rem; align-items: center;">
+                        <div class="mkt-icon-left">🎵</div>
+                        <div class="mkt-content-center">
+                            <h5>Connecter Spotify</h5>
+                            <p>Partage tes derniers coups de coeur.</p>
+                        </div>
+                        <button class="mkt-action-btn-mini">Lier</button>
+                    </div>
+
+                    <!-- PREFERENCES APPEL -->
+                    <h4 class="section-micro-title">Préférences de contact</h4>
+                    <div class="settings-list-v2" style="margin-bottom: 1rem;">
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Appels Audio</div>
+                            <div class="toggle-switch-ui active">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                        <div class="setting-row-premium">
+                            <div class="setting-label">Appels Vidéo</div>
+                            <div class="toggle-switch-ui">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="section-footer-note">Ces options permettent aux autres de te contacter si le match est
+                        validé.</p>
+
+                </div>
+            </section>
+
             <!-- PROFILE DETAILS SCREEN (FULL BIO) -->
             <section id="profile-details-screen" class="hidden step-transition">
                 <div class="profile-details-hero">

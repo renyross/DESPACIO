@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const likesScreen = document.getElementById('likes-screen');
     const messagesListScreen = document.getElementById('messages-list-screen');
     const profileDetailsScreen = document.getElementById('profile-details-screen');
+    const profileEditScreen = document.getElementById('profile-edit-screen');
     const endView = document.getElementById('end-view');
     const matchOverlay = document.getElementById('match-overlay');
     const toast = document.getElementById('notification-toast');
@@ -184,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (from === to) return;
 
         // 1. Handle Navigation Visibility IMMEDIATELY
-        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view'];
+        const hideNavOn = ['user-profile', 'settings-screen', 'chat-screen', 'end-view', 'profile-edit-screen'];
         const shouldHideNav = hideNavOn.includes(to.id) || !showNav;
 
         if (shouldHideNav) {
@@ -748,14 +749,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnGlobalEdit = document.getElementById('btn-global-edit');
     if (btnGlobalEdit) {
         btnGlobalEdit.addEventListener('click', () => {
-            // Simulate a flow of editing by triggering the name edit first
-            // In a real app, this would open a modal with a form.
-            document.getElementById('btn-edit-name').click();
-            setTimeout(() => {
-                if (confirm("Continuer vers l'édition de la bio ?")) {
-                    document.getElementById('btn-edit-bio').click();
-                }
-            }, 500);
+            transitionScreens(userProfile, profileEditScreen);
+        });
+    }
+
+    const btnCloseEdit = document.getElementById('btn-close-edit');
+    if (btnCloseEdit) {
+        btnCloseEdit.addEventListener('click', () => {
+            transitionScreens(profileEditScreen, userProfile);
         });
     }
 

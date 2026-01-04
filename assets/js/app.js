@@ -885,4 +885,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // [New] Back Button for Onboarding Permissions
+    const btnBackPerms = document.getElementById('btn-back-perms');
+    if (btnBackPerms) {
+        btnBackPerms.addEventListener('click', () => {
+            const onboardingPerms = document.getElementById('onboarding-perms');
+            const onboardingIntent = document.getElementById('onboarding-intent');
+            const progress = document.getElementById('onboarding-progress');
+            transitionScreens(onboardingPerms, onboardingIntent);
+            if (progress) progress.style.width = '33%';
+        });
+    }
+
 });

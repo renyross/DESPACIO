@@ -285,14 +285,6 @@ body {
     color: var(--text-muted);
 }
 
-.micro-disclaimer {
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    font-style: italic;
-    margin-bottom: 2rem;
-}
-
-/* Permissions */
 .permission-group {
     display: flex;
     flex-direction: column;
@@ -302,23 +294,43 @@ body {
 
 .perm-item {
     display: flex;
-    gap: 1rem;
     align-items: center;
+    /* Vertically center icon, text, and switch */
+    gap: 1.2rem;
+}
+
+.perm-text {
+    flex: 1;
+    /* Push the switch to the right */
+}
+
+/* Ensure switch doesn't shrink */
+.perm-item .toggle-switch-ui {
+    flex-shrink: 0;
+}
+
+.micro-disclaimer {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 2rem;
 }
 
 .perm-icon {
     width: 48px;
     height: 48px;
-    background: var(--bg-card);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    border: 1px solid var(--glass-border);
 }
 
 .perm-text h5 {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
     font-weight: 500;
 }
 

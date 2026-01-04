@@ -266,6 +266,24 @@ document.addEventListener('DOMContentLoaded', () => {
         transitionScreens(loginScreen, landing, false);
     });
 
+    // Social Login
+    const btnLoginApple = document.getElementById('btn-login-apple');
+    const btnLoginFacebook = document.getElementById('btn-login-facebook');
+    const mockSocialLogin = (provider) => {
+        showToast("Bienvenue !", "Prends ton temps.", "✨");
+        setTimeout(() => {
+            // Reset Onboarding State
+            if (onboardingIntent) onboardingIntent.classList.remove('hidden');
+            if (onboardingProfile) onboardingProfile.classList.add('hidden');
+            if (onboardingPrelude) onboardingPrelude.classList.add('hidden');
+            if (onboardingProgress) onboardingProgress.style.width = "25%";
+
+            transitionScreens(loginScreen, onboardingFlow, true);
+        }, 1000);
+    };
+    if (btnLoginApple) btnLoginApple.addEventListener('click', () => mockSocialLogin("Apple"));
+    if (btnLoginFacebook) btnLoginFacebook.addEventListener('click', () => mockSocialLogin("Facebook"));
+
     if (btnRequestOtp) btnRequestOtp.addEventListener('click', () => {
         const phoneInput = document.getElementById('login-phone-input');
         // Basic validation
@@ -304,8 +322,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             status.innerText = "Succès";
                             status.style.color = "#4CAF50";
                         }
+                        showToast("Bienvenue !", "Prends ton temps.", "✨");
                         setTimeout(() => {
-                            transitionScreens(otpScreen, discovery, true);
+                            // Reset Onboarding State
+                            if (onboardingIntent) onboardingIntent.classList.remove('hidden');
+                            if (onboardingProfile) onboardingProfile.classList.add('hidden');
+                            if (onboardingPrelude) onboardingPrelude.classList.add('hidden');
+                            if (onboardingProgress) onboardingProgress.style.width = "25%";
+
+                            transitionScreens(otpScreen, onboardingFlow, true);
                         }, 800);
                     }, 1000);
                 }
@@ -412,14 +437,139 @@ document.addEventListener('DOMContentLoaded', () => {
         btnFinalCreate.addEventListener('click', () => {
             showToast("Compte créé", "Bienvenue sur Despacío.", "✨");
             setTimeout(() => {
+                // To Onboarding Flow
                 signupScreen.classList.add('hidden');
-                // Go to Onboarding Flow or directly App
                 onboardingFlow.classList.remove('hidden');
-                const intent = document.getElementById('onboarding-intent');
-                if (intent) intent.classList.remove('hidden');
+
+                // Reset/Ensure Intent is first (New Request)
+                const intentScreen = document.getElementById('onboarding-intent');
+                const profileScreen = document.getElementById('onboarding-profile');
+                if (intentScreen) intentScreen.classList.remove('hidden');
+                if (profileScreen) profileScreen.classList.add('hidden');
+
+                const progress = document.getElementById('onboarding-progress');
+                if (progress) progress.style.width = '25%';
             }, 1000);
         });
     }
+
+    // --- NEW ONBOARDING FLOW LOGIC ---
+    // Variables already declared at top or repurposed:
+    // onboardingFlow, onboardingIntent are global.
+    const onboardingProfile = document.getElementById('onboarding-profile');
+    const onboardingPrelude = document.getElementById('onboarding-prelude');
+    const onboardingProgress = document.getElementById('onboarding-progress');
+
+    // Intent Screen Buttons
+    const btnToProfile = document.getElementById('btn-to-profile');
+    const btnSkipIntent = document.getElementById('btn-skip-intent');
+
+    // Profile Screen Buttons
+    const btnToPrelude = document.getElementById('btn-to-prelude');
+    const btnSkipPhoto = document.getElementById('btn-skip-photo');
+    const btnUploadPhoto = document.getElementById('btn-upload-photo');
+    const profilePreviewImg = document.getElementById('profile-preview-img');
+    const uploadIcon = document.getElementById('upload-icon');
+
+    // Prelude Screen Buttons
+    const btnStartDiscovery = document.getElementById('btn-start-discovery');
+
+    // Intent Selection
+    document.querySelectorAll('.intent-card').forEach(card => {
+        card.addEventListener('click', () => {
+            document.querySelectorAll('.intent-card').forEach(c => c.style.border = 'none'); // Reset
+            card.style.border = '1px solid var(--accent-lilas)';
+        });
+    });
+
+    const goToProfile = () => {
+        transitionScreens(onboardingIntent, onboardingProfile, true);
+        if (onboardingProgress) onboardingProgress.style.width = "50%";
+    };
+
+    if (btnToProfile) btnToProfile.addEventListener('click', goToProfile);
+    if (btnSkipIntent) btnSkipIntent.addEventListener('click', goToProfile);
+
+    const goToPrelude = () => {
+        transitionScreens(onboardingProfile, onboardingPrelude, true);
+        if (onboardingProgress) onboardingProgress.style.width = "75%";
+    };
+
+    if (btnToPrelude) btnToPrelude.addEventListener('click', goToPrelude);
+    if (btnSkipPhoto) btnSkipPhoto.addEventListener('click', goToPrelude);
+
+    // Photo Upload (Mock)
+    if (btnUploadPhoto) {
+        btnUploadPhoto.addEventListener('click', () => {
+            const mockPhotos = ["assets/images/landing_hero_1.jpg", "assets/images/ines.png", "assets/images/landing_hero_2.jpg"];
+            const randomPhoto = mockPhotos[Math.floor(Math.random() * mockPhotos.length)];
+            if (uploadIcon) uploadIcon.style.display = 'none';
+            if (profilePreviewImg) {
+                profilePreviewImg.src = randomPhoto;
+                profilePreviewImg.style.display = 'block';
+            }
+        });
+    }
+
+    if (btnStartDiscovery) {
+        btnStartDiscovery.addEventListener('click', () => {
+            // Go To App
+            onboardingFlow.classList.add('hidden');
+            discovery.classList.remove('hidden');
+        });
+    }
+
+    // --- ONBOARDING PROFILE LOGIC ---
+    // The previous onboardingProfile logic has been refactored and moved into the NEW ONBOARDING FLOW LOGIC section above.
+    // The following variables and event listeners are now part of the new flow or are no longer needed in their old form.
+    // const onboardingProfile = document.getElementById('onboarding-profile'); // Defined above
+    // const btnToIntent = document.getElementById('btn-to-intent'); // Replaced by btnToProfile
+    const firstNameInput = document.getElementById('onboarding-firstname');
+    const ageInput = document.getElementById('onboarding-age');
+    // const btnUploadPhoto = document.getElementById('btn-upload-photo'); // Defined above
+    // const profilePreviewImg = document.getElementById('profile-preview-img'); // Defined above
+    // const uploadIcon = document.getElementById('upload-icon'); // Defined above
+
+    let isPhotoUploaded = false; // This state might need to be managed within the new flow
+
+    const validateProfile = () => {
+        // This validation logic should be integrated into the new onboarding profile step
+        // to enable/disable btnToPrelude
+        if (firstNameInput && ageInput && firstNameInput.value.length > 1 && ageInput.value.length > 1 && isPhotoUploaded) {
+            if (btnToPrelude) btnToPrelude.classList.remove('disabled');
+        } else {
+            if (btnToPrelude) btnToPrelude.classList.add('disabled');
+        }
+    };
+
+    if (firstNameInput) firstNameInput.addEventListener('input', validateProfile);
+    if (ageInput) ageInput.addEventListener('input', validateProfile);
+
+    // The btnUploadPhoto listener is now defined in the NEW ONBOARDING FLOW LOGIC section
+    // if (btnUploadPhoto) {
+    //     btnUploadPhoto.addEventListener('click', () => {
+    //         // Simulate Photo Upload
+    //         const mockPhotos = ["assets/images/landing_hero_1.jpg", "assets/images/ines.png", "assets/images/landing_hero_2.jpg"];
+    //         const randomPhoto = mockPhotos[Math.floor(Math.random() * mockPhotos.length)];
+
+    //         if (uploadIcon) uploadIcon.style.display = 'none';
+    //         if (profilePreviewImg) {
+    //             profilePreviewImg.src = randomPhoto;
+    //             profilePreviewImg.style.display = 'block';
+    //         }
+    //         isPhotoUploaded = true;
+    //         validateProfile();
+    //     });
+    // }
+
+    // The btnToIntent listener is replaced by btnToProfile and btnSkipIntent
+    // if (btnToIntent) {
+    //     btnToIntent.addEventListener('click', () => {
+    //         transitionScreens(onboardingProfile, onboardingIntent, true);
+    //         const progress = document.getElementById('onboarding-progress');
+    //         if (progress) progress.style.width = '45%';
+    //     });
+    // }
 
     if (btnToPerms) btnToPerms.addEventListener('click', () => {
         transitionScreens(onboardingIntent, onboardingPerms);

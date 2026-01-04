@@ -678,8 +678,8 @@ body {
     width: 100%;
     /* Full width */
     max-width: 480px;
-    background: rgba(20, 22, 26, 0.95);
-    /* Slightly more opaque */
+    background: var(--bg-dark);
+    /* Match background */
     border-top: 1px solid var(--glass-border);
     backdrop-filter: var(--glass-blur);
     border-radius: 0;
@@ -706,9 +706,8 @@ body {
     padding: 0.5rem;
     flex: 1;
     font-size: 0.65rem;
-    /* text-transform: uppercase; Removed for sentence case */
-    letter-spacing: 0;
-    /* Reduced letter spacing */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .nav-icon svg {
@@ -2332,4 +2331,38 @@ input:focus {
     width: calc(100% - 2rem);
     margin-left: 1rem;
     margin-right: 1rem;
+}
+/* NEW LANDING PAGE (Meetic Style) */
+#landing {
+    height: 100dvh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), url('../images/landing_bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#landing .header-group {
+    padding-top: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#landing .landing-ctas {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Landing Specific Button Overrides */
+#landing .btn-secondary {
+    background: white;
+    color: black;
+    border: none;
+    font-weight: 600;
 }

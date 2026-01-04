@@ -2126,3 +2126,132 @@ body.nav-hidden #main-nav {
     margin-bottom: 0.5rem;
     box-shadow: 0 4px 10px rgba(162, 128, 255, 0.4);
 }
+/* =========================================
+   NAVIGATION ARROWS REFINEMENT
+   ========================================= */
+
+/* Back Button (Header) - Standardized */
+.btn-back-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-pure);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;      /* 44x44px Touch Target */
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+    /* Ensure it overrides any previous simple text styles */
+    font-size: 0; /* Hide any fallback text if somehow mixed */
+}
+
+.btn-back-icon:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(-2px); /* Subtle feedback */
+}
+
+.btn-back-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2px;
+}
+
+/* List Item Chevron Arrows */
+.arrow-s, .arrow-v3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    width: 24px;
+    height: 24px;
+    font-size: 0; /* Hide text fallback */
+}
+
+.arrow-s svg, .arrow-v3 svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2px;
+    opacity: 0.6;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.setting-row-premium:active .arrow-s svg,
+.list-item-v3:active .arrow-v3 svg {
+    transform: translateX(3px);
+    opacity: 1;
+}
+
+/* Hotfix: Ensure button behaves as inline element */
+.btn-back-icon, .arrow-s, .arrow-v3 {
+    display: inline-flex;
+}
+
+/* =========================================
+   MOBILE FIRST REFACTOR (Responsive Polishing)
+   ========================================= */
+
+/* 1. Dynamic Viewport Height Fix (Safari Mobile) */
+body, .container {
+    height: 100vh; /* Fallback */
+    height: 100dvh;
+    width: 100%;
+    max-width: 480px; /* Ensure mobile constraint */
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* 2. Safe Area Insets Integration */
+#main-nav {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+    height: auto; /* allow growth for padding */
+    min-height: 80px; /* Ensure touch target space */
+}
+
+/* Adjust sticky headers for notched phones if needed */
+.glass-header {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+/* 3. Touch Optimization */
+button, a, .nav-item, .setting-row-premium, .list-item-v3 {
+    touch-action: manipulation; /* Eliminate click delay */
+    -webkit-tap-highlight-color: transparent; /* Remove native flash */
+    cursor: pointer;
+}
+
+/* 4. Small Screen Typography Scale */
+@media (max-width: 360px) {
+    html {
+        font-size: 14px;
+    }
+    .onboarding-title {
+        font-size: 1.8rem;
+    }
+    .profile-main-header .user-display-name {
+        font-size: 1.5rem;
+    }
+}
+
+/* 5. Horizontal Scroll Prevention */
+.feature-grid, .settings-list-v2, .premium-list-v3 {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* 6. Form Visibility on Mobile Keyboards */
+input:focus {
+    scroll-margin-top: 100px; /* Ensure input isn't hidden by sticky header */
+}
+
+/* Fix Floating Button for Notch */
+.btn-back-floating {
+    top: max(1.5rem, calc(1rem + env(safe-area-inset-top)));
+    left: max(1.5rem, env(safe-area-inset-left));
+}

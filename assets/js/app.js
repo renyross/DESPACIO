@@ -874,4 +874,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (--t < 0) { clearInterval(timerInt); transitionScreens(chatScreen, endView); }
         }, 1000);
     };
+    // [New] Back Button for Onboarding Intent
+    const btnBackIntent = document.getElementById('btn-back-intent');
+    if (btnBackIntent) {
+        btnBackIntent.addEventListener('click', () => {
+            // Access transitionScreens from closure scope
+            const landing = document.getElementById('landing');
+            const onboardingFlow = document.getElementById('onboarding-flow');
+            transitionScreens(onboardingFlow, landing);
+        });
+    }
+
 });

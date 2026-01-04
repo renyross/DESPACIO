@@ -50,7 +50,11 @@
         <section id="signup-screen" class="hidden step-transition">
             <header class="profile-nav-header glass-header"
                 style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
-                <button class="btn-back-icon" id="btn-back-signup">←</button>
+                <button class="btn-back-icon" id="btn-back-signup"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5m7-7-7 7 7 7" />
+                    </svg></button>
                 <div style="flex: 1;"></div>
             </header>
 
@@ -100,6 +104,16 @@
 
             <!-- SCREEN 1: INTENTION -->
             <section id="onboarding-intent" class="onboarding-screen step-transition">
+                <header class="profile-nav-header glass-header"
+                    style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
+                    <button class="btn-back-icon" id="btn-back-intent"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5m7-7-7 7 7 7" />
+                        </svg></button>
+                    <div style="flex: 1;"></div>
+                </header>
+
                 <h2 class="onboarding-title">Quelle est ton<br><span style="color: var(--accent-lilas)">énergie</span>
                     aujourd'hui ?</h2>
                 <div class="intent-selector">
@@ -238,7 +252,11 @@
             <section id="user-profile" class="hidden step-transition">
                 <header class="profile-nav-header glass-header"
                     style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
-                    <button class="btn-back-icon" id="btn-close-profile">←</button>
+                    <button class="btn-back-icon" id="btn-close-profile"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5m7-7-7 7 7 7" />
+                        </svg></button>
                     <h3 style="font-weight: 300; letter-spacing: 0.15em; font-size: 0.9rem; text-transform: uppercase;">
                         Résonance Perso</h3>
                     <button id="btn-open-settings"
@@ -315,18 +333,30 @@
                             <div class="setting-row-premium" id="btn-edit-name">
                                 <div class="setting-label">Nom d'affichage</div>
                                 <div class="setting-value" id="val-name">Léo</div>
-                                <span class="arrow-s">›</span>
+                                <span class="arrow-s"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="setting-row-premium" id="btn-edit-bio">
                                 <div class="setting-label">Bio éphémère</div>
                                 <div class="setting-value truncate" id="val-bio">"Vibrations intenses et caféines..."
                                 </div>
-                                <span class="arrow-s">›</span>
+                                <span class="arrow-s"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="setting-row-premium" id="btn-edit-intent">
                                 <div class="setting-label">Intention active</div>
                                 <div class="setting-value" id="val-intent">Chill</div>
-                                <span class="arrow-s">›</span>
+                                <span class="arrow-s"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                         </div>
                     </div>
@@ -339,7 +369,11 @@
             <section id="settings-screen" class="hidden step-transition">
                 <header class="profile-nav-header glass-header"
                     style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
-                    <button class="btn-back-icon" id="btn-close-settings">←</button>
+                    <button class="btn-back-icon" id="btn-close-settings"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5m7-7-7 7 7 7" />
+                        </svg></button>
                     <h3 style="font-weight: 300; letter-spacing: 0.15em; font-size: 0.9rem; text-transform: uppercase;">
                         Paramètres</h3>
                     <div style="width: 24px;"></div>
@@ -364,13 +398,21 @@
                                 <div class="item-icon-v3">📧</div>
                                 <div class="item-label-v3">Email</div>
                                 <div class="item-value-v3">leo@despacio.app</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">🔒</div>
                                 <div class="item-label-v3">Mot de passe</div>
                                 <div class="item-value-v3">••••••••</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                         </div>
                     </div>
@@ -460,32 +502,56 @@
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">🤝</div>
                                 <div class="item-label-v3">Aide en ligne</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">🛡️</div>
                                 <div class="item-label-v3">Conseils de sécurité</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">📜</div>
                                 <div class="item-label-v3">Conditions d'utilisation</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">🕵️</div>
                                 <div class="item-label-v3">Préférences de confidentialité</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">🏛️</div>
                                 <div class="item-label-v3">Règles de communauté</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                             <div class="list-item-v3">
                                 <div class="item-icon-v3">👁️‍🗨️</div>
                                 <div class="item-label-v3">Politique de confidentialité</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                         </div>
                     </div>
@@ -497,7 +563,11 @@
                             <div class="list-item-v3 danger">
                                 <div class="item-icon-v3">🗑️</div>
                                 <div class="item-label-v3">Supprimer mon compte</div>
-                                <span class="arrow-v3">›</span>
+                                <span class="arrow-v3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg></span>
                             </div>
                         </div>
                         <p class="section-footer-note">"Tout est sous ton contrôle."</p>
@@ -517,7 +587,11 @@
             <section id="profile-edit-screen" class="hidden step-transition">
                 <header class="profile-nav-header glass-header"
                     style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
-                    <button class="btn-back-icon" id="btn-close-edit">←</button>
+                    <button class="btn-back-icon" id="btn-close-edit"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5m7-7-7 7 7 7" />
+                        </svg></button>
                     <h3 style="font-weight: 300; letter-spacing: 0.15em; font-size: 0.9rem; text-transform: uppercase;">
                         Modification</h3>
                     <div style="width: 24px;"></div>
@@ -559,55 +633,120 @@
                     <div class="settings-list-v2" style="margin-bottom: 2rem;">
                         <div class="setting-row-premium">
                             <div class="setting-label">Profession</div>
-                            <div class="setting-value">Designer</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Designer</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Taille</div>
-                            <div class="setting-value">1m80</div><span class="arrow-s">›</span>
+                            <div class="setting-value">1m80</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Fumeur</div>
-                            <div class="setting-value">Non</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Non</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Enfants</div>
-                            <div class="setting-value">Non</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Non</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Nationalité</div>
-                            <div class="setting-value">Française</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Française</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Religion</div>
-                            <div class="setting-value">Agnostique</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Agnostique</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Origine</div>
-                            <div class="setting-value">Mixte</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Mixte</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Signe Astro</div>
-                            <div class="setting-value">Lion</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Lion</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Identité de genre</div>
-                            <div class="setting-value">Homme</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Homme</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Je vis</div>
-                            <div class="setting-value">Seul</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Seul</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Je mange</div>
-                            <div class="setting-value">Tout</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Tout</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Je parle</div>
-                            <div class="setting-value">Fr, En</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Fr, En</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Animaux</div>
-                            <div class="setting-value">Chat</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Chat</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                     </div>
 
@@ -616,23 +755,48 @@
                     <div class="settings-list-v2" style="margin-bottom: 2rem;">
                         <div class="setting-row-premium">
                             <div class="setting-label">Hobbies</div>
-                            <div class="setting-value">Photo, Lecture</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Photo, Lecture</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Sorties</div>
-                            <div class="setting-value">Rooftops</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Rooftops</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Sports</div>
-                            <div class="setting-value">Escalade</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Escalade</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Films</div>
-                            <div class="setting-value">Sci-Fi</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Sci-Fi</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                         <div class="setting-row-premium">
                             <div class="setting-label">Musique</div>
-                            <div class="setting-value">Electro</div><span class="arrow-s">›</span>
+                            <div class="setting-value">Electro</div><span class="arrow-s"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m9 18 6-6-6-6" />
+                                </svg></span>
                         </div>
                     </div>
 
@@ -641,7 +805,11 @@
                     <div class="settings-list-v2 edit-section-spacer">
                         <div class="setting-row-premium">
                             <div class="setting-label add-question-label">Ajouter une question...</div>
-                            <span class="arrow-s">+</span>
+                            <span class="arrow-s"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 5v14M5 12h14" />
+                                </svg></span>
                         </div>
                     </div>
 
@@ -944,7 +1112,7 @@
 
             <!-- END VIEW -->
             <section id="end-view" class="hidden"
-                style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+                style="min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
                 <div style="font-size: 3rem; margin-bottom: 2rem;">✨</div>
                 <h3 style="font-size: 1.5rem; font-weight: 300; margin-bottom: 1rem;">C'est tout pour aujourd'hui.</h3>
                 <p style="color: var(--text-muted); font-weight: 200; margin-bottom: 3rem;">Profitez de votre présence

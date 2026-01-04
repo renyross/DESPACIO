@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileDetailsScreen = document.getElementById('profile-details-screen');
     const profileEditScreen = document.getElementById('profile-edit-screen');
     const signupScreen = document.getElementById('signup-screen');
+    const loginScreen = document.getElementById('login-screen');
     const endView = document.getElementById('end-view');
     const matchOverlay = document.getElementById('match-overlay');
     const toast = document.getElementById('notification-toast');
@@ -26,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCreateAccount = document.getElementById('btn-create-account');
     const btnSubmitSignup = document.getElementById('btn-submit-signup');
     const btnBackSignup = document.getElementById('btn-back-signup');
+    const btnLoginPhone = document.getElementById('btn-login-phone');
+    const btnBackLogin = document.getElementById('btn-back-login');
     const intentCards = document.querySelectorAll('.intent-card');
 
     // Discovery Logic
@@ -251,8 +254,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- APP FLOW LOGIC ---
     if (btnEnter) btnEnter.addEventListener('click', () => {
-        landing.classList.add('hidden');
-        onboardingFlow.classList.remove('hidden');
+        transitionScreens(landing, loginScreen, false);
+    });
+
+    if (btnBackLogin) btnBackLogin.addEventListener('click', () => {
+        transitionScreens(loginScreen, landing, false);
+    });
+
+    if (btnLoginPhone) btnLoginPhone.addEventListener('click', () => {
+        // Mock transition to Onboarding/Discovery
+        transitionScreens(loginScreen, onboardingFlow, false);
     });
 
     if (btnCreateAccount) btnCreateAccount.addEventListener('click', () => {

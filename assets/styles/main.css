@@ -2332,6 +2332,7 @@ input:focus {
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
 /* NEW LANDING PAGE (Meetic Style) */
 #landing {
     height: 100dvh;
@@ -2339,9 +2340,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), url('../images/landing_bg.png');
-    background-size: cover;
-    background-position: center;
+    background: var(--bg-dark);
 }
 
 #landing .header-group {
@@ -2360,9 +2359,157 @@ input:focus {
 }
 
 /* Landing Specific Button Overrides */
+#landing .btn-premium {
+    padding: 0.6rem;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
 #landing .btn-secondary {
     background: white;
     color: black;
     border: none;
     font-weight: 600;
+}
+
+/* Signup Form Styles */
+.field-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.input-premium {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 1rem;
+    color: white;
+    border-radius: 12px;
+    outline: none;
+    transition: var(--transition-fast);
+    font-family: inherit;
+}
+
+.input-premium:focus {
+    border-color: var(--accent-lilas);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.chip-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chip {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.chip.active {
+    background: var(--accent-lilas);
+    color: #1a1a1a;
+    border-color: var(--accent-lilas);
+    font-weight: 600;
+}
+
+/* Login Screen Styles */
+.btn-pill-white {
+    width: 100%;
+    background: white;
+    color: #333;
+    border: 2px solid white;
+    padding: 0.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s, background 0.2s;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+}
+
+.btn-pill-white span {
+    display: inline-block;
+    width: 24px;
+    text-align: center;
+}
+
+.btn-pill-white:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Signup Layout V2 - Detailed Form */
+.form-section {
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1.5rem;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--accent-lilas);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.micro-info {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-lilas);
+    margin-top: 2px;
+}
+
+.link-discrete {
+    color: var(--text-dim);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.link-discrete:hover {
+    color: white;
+}
+
+.checkbox-row a {
+    color: white;
+    text-decoration: underline;
 }

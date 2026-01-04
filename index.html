@@ -29,7 +29,7 @@
         </section>
 
         <!-- SIGNUP SCREEN -->
-        <section id="signup-screen" class="hidden step-transition">
+        <section id="signup-screen" class="hidden step-transition" style="min-height: 100dvh;">
             <header class="profile-nav-header glass-header"
                 style="position: sticky; top: 0; z-index: 100; background: var(--bg-dark);">
                 <button class="btn-back-icon" id="btn-back-signup"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -40,41 +40,145 @@
                 <div style="flex: 1;"></div>
             </header>
 
-            <div class="container-content"
-                style="padding: 2rem; display: flex; flex-direction: column; min-height: 80vh; justify-content: center;">
+            <div class="signup-content" style="padding: 1.5rem; padding-bottom: 6rem; color: white;">
 
-                <h2 class="onboarding-title" style="text-align: left; margin-bottom: 2rem;">Initier votre<br><span
-                        style="color: var(--accent-lilas);">Espace</span></h2>
+                <h2 style="font-size: 1.8rem; margin-bottom: 2rem; font-weight: 300;">Créer un compte</h2>
 
-                <div class="input-group" style="margin-bottom: 1.5rem;">
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.05em;">IDENTIFIANT</label>
-                    <div class="input-wrapper"
-                        style="border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(255,255,255,0.03);">
-                        <input type="email" placeholder="votre@email.com"
-                            style="width: 100%; background: transparent; border: none; padding: 1rem; color: white; outline: none;">
+                <div class="form-grid" style="display: flex; flex-direction: column; gap: 2rem;">
+
+                    <!-- 1. Coordonnées -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Coordonnées</h3>
+                        <div class="input-group">
+                            <label class="field-label">Numéro de téléphone</label>
+                            <input type="tel" class="input-premium" placeholder="+33 6 XX XX XX XX">
+                        </div>
+                        <div class="input-group" style="margin-top: 1rem;">
+                            <label class="field-label">Adresse email</label>
+                            <input type="email" class="input-premium" placeholder="ex : prenom@email.com">
+                        </div>
+                        <p class="micro-info">Nous priorisons le téléphone pour sécuriser ton compte.</p>
                     </div>
+
+                    <!-- 2. Identité -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Identité</h3>
+                        <label class="field-label">Sexe</label>
+                        <div class="chip-selector">
+                            <button class="chip active">Homme</button>
+                            <button class="chip">Femme</button>
+                            <button class="chip">Autre</button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Préférences -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Préférences</h3>
+                        <label class="field-label">Je recherche</label>
+                        <div class="chip-selector">
+                            <button class="chip">Un homme</button>
+                            <button class="chip active">Une femme</button>
+                            <button class="chip">Les deux</button>
+                        </div>
+                    </div>
+
+                    <!-- 4. Positionnement -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Localisation</h3>
+                        <button class="btn-geo-outline"
+                            style="width: 100%; text-align: center; padding: 1rem; border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(255,255,255,0.03); color: white; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer;">
+                            <span>📍</span> Autoriser la géolocalisation
+                        </button>
+                        <input type="text" class="input-premium" placeholder="Entrer une ville manuellement">
+                        <p class="micro-info" style="margin-top: 0.5rem;">Ta position sert uniquement à te proposer des
+                            profils proches.</p>
+                    </div>
+
+                    <!-- 5. Consentement -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Consentement</h3>
+
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="chk-cgu" class="custom-checkbox">
+                            <label for="chk-cgu">J’ai plus de 18 ans et j’accepte les <a href="#">Conditions
+                                    d’utilisation</a></label>
+                        </div>
+
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="chk-privacy" class="custom-checkbox">
+                            <label for="chk-privacy">Je consens à l’utilisation de mes données conformément à la <a
+                                    href="#">Politique de confidentialité</a></label>
+                        </div>
+
+                        <div style="margin-top: 1rem; font-size: 0.75rem;">
+                            <a href="#" class="link-discrete">Règles de respect & consentement</a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="input-group" style="margin-bottom: 2rem;">
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.05em;">CLÉ
-                        D'ACCÈS</label>
-                    <div class="input-wrapper"
-                        style="border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(255,255,255,0.03);">
-                        <input type="password" placeholder="••••••••"
-                            style="width: 100%; background: transparent; border: none; padding: 1rem; color: white; outline: none;">
-                    </div>
+                <!-- 6. Action -->
+                <div style="margin-top: 2.5rem;">
+                    <button class="btn-premium btn-primary" id="btn-submit-signup" style="width: 100%;">Créer mon
+                        compte</button>
+                    <p style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.8rem;">
+                        Inscription rapide. Désinscription quand tu veux.</p>
                 </div>
 
-                <button class="btn-premium btn-primary" id="btn-submit-signup"
-                    style="width: 100%; margin-bottom: 1.5rem;">Activer l'espace</button>
+            </div>
+        </section>
 
-                <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
-                    En continuant, vous acceptez nos <span style="text-decoration: underline;">Conditions de
-                        Résonance</span>.
+        <!-- LOGIN SCREEN (Tinder Style) -->
+        <section id="login-screen" class="hidden step-transition"
+            style="background: linear-gradient(135deg, #FD297B 0%, #FF655B 100%); display: flex; flex-direction: column; padding: 1.5rem; min-height: 100dvh;">
+
+            <header class="glass-header" style="background: transparent; padding: 0;">
+                <button class="btn-back-icon" id="btn-back-login"
+                    style="color: white; background: rgba(0,0,0,0.1); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border:none;"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg></button>
+            </header>
+
+            <div
+                style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white;">
+                <div class="logo-container"
+                    style="margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <!-- Using White Logo -->
+                    <img src="assets/images/logo.png"
+                        style="height: 50px; filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+                    <span
+                        style="font-family: 'Outfit'; font-weight: 700; font-size: 2.5rem; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">despacio</span>
+                </div>
+            </div>
+
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 0.8rem; padding-bottom: 2rem;">
+
+                <p
+                    style="text-align: center; color: rgba(255,255,255,0.9); font-size: 0.75rem; margin-bottom: 1.5rem; line-height: 1.4; padding: 0 1rem;">
+                    En appuyant sur « Créer un compte » ou sur « Connexion », tu acceptes nos <a href="#"
+                        style="color: white; text-decoration: underline; font-weight: 600;">Conditions Générales</a>.
+                    Découvre comment nous traitons tes données dans notre <a href="#"
+                        style="color: white; text-decoration: underline; font-weight: 600;">Politique de
+                        Confidentialité</a>.
                 </p>
 
+                <button class="btn-pill-white">
+                    <span style="margin-right: 0.8rem; font-size: 1.1rem;"></span> Se connecter avec Apple
+                </button>
+                <button class="btn-pill-white">
+                    <span style="margin-right: 0.8rem; font-size: 1.1rem; color: #1877F2; font-weight: bold;">f</span>
+                    Se connecter avec Facebook
+                </button>
+                <button class="btn-pill-white" id="btn-login-phone">
+                    <span style="margin-right: 0.8rem; font-size: 1.1rem;">📞</span> Connexion avec un numéro
+                </button>
+
+                <p
+                    style="text-align: center; color: white; font-size: 0.9rem; margin-top: 1.5rem; font-weight: 500; cursor: pointer;">
+                    Des problèmes de connexion ?
+                </p>
             </div>
         </section>
 
